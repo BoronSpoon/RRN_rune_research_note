@@ -41,15 +41,16 @@ def svg_fill(buffer, output_path): # fill polylines in svg for visibility improv
     lines = []
     buffer.seek(0)
     lines = buffer.read()
+    lines = lines.split("\n")
     for count in range(len(lines)):
-        matches = re.search(r"; stroke: (.*?);", lines[count])
+        matches = re.search(r"; stroke:(.*?);", lines[count])
         if matches is not None:
             color = matches.groups()[0]
             lines[count] = re.sub(r'fill:(.*?);', fr'fill:{color};', lines[count]) # add fill color
             lines[count] = re.sub(r'fill:', fr'fill-opacity=50%;fill:', lines[count]) # add fill opacity
 
     with open(output_path, "w") as f:
-        f.writelines(lines)
+        f.writelines(line+"\n" for line in lines)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
