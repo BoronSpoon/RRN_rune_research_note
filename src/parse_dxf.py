@@ -6,7 +6,6 @@ from ezdxf.addons.drawing.properties import Properties, LayoutProperties
 from ezdxf.addons.drawing.config import Configuration
 import re
 import os
-import argparse
 import io
 
 # DXF
@@ -52,18 +51,5 @@ def svg_fill(buffer, output_path): # fill polylines in svg for visibility improv
     with open(output_path, "w") as f:
         f.writelines(line+"\n" for line in lines)
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("path", help="input path")
-    args = parser.parse_args()
-    input_path = args.path
-    input_directory = os.path.dirname(input_path)
-    input_filename = os.path.basename(input_path)
-    input_filename_wo_ext = os.path.splitext(input_filename)[0]
-
-    output_directory = os.path.join(input_directory, "report")
-    output_filename = input_filename_wo_ext + ".svg"
-    output_path = os.path.join(output_directory, output_filename)
-    if not os.path.isdir(output_directory):
-        os.mkdir(output_directory)
-    parse_autocad(input_path, output_path)
+def main(**kwargs):
+    parse_autocad(kwargs["input_path"], kwargs["output_path"])
