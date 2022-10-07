@@ -15,14 +15,18 @@ def pd_read_csv(filename, encoding, sep, header_count, names_old, names_new, uni
 def plot(df, plot_path):
     ax = plt.gca()
     keys = df.keys()
-    plot_kwargs = {
-        "lw": 0,
-        "marker": ".",
-        "markersize": 5,
-    }
     plot_params = {
         "axes.labelsize": 16,
-        "axes.titlesize": 16,
+        "axes.titlesize": 16,    
+        "lines.linestyle": "solid",
+        "lines.linewidth": 2,
+        "lines.markersize": 5,
+        "xtick.major.size": 3.5,
+        "xtick.minor.size": 2,
+        "xtick.labelsize": 13,
+        "ytick.major.size": 3.5,
+        "ytick.minor.size": 2,
+        "ytick.labelsize": 13,
     }
     plt.rcParams.update(plot_params)
     if len(keys) == 2: # dont need legend for two axis
@@ -30,4 +34,4 @@ def plot(df, plot_path):
     else:
         df.plot(kind="line", x=keys[0], y=keys[1])
 
-    plt.savefig(plot_path)
+    plt.savefig(plot_path, bbox_inches="tight")
