@@ -3,16 +3,16 @@ import numpy as np
 import pandas as pd
 from misc import *
 
-def read_files(input_path, output_path):
+def read_files(input_path, csv_path, plot_path):
     with open(input_path, "r") as f:
         lines = f.readlines()
 
-    data = pd_read_csv( 
-        filename=input_path, encoding="utf-8", sep=", ", header_count=0, 
-        names_old=["position (mm)", "height (μm)"], names_new=["position (μm)", "height (nm)"], unit_conversion_coefficients=[1000, 1],
+    df = pd_read_csv( 
+        filename=input_path, encoding="utf-8", sep=", ", header_count=0,
+        names_old=["position (mm)", "height (μm)"], names_new=["position (μm)", "height (nm)"], unit_conversion_coefficients=[1, 1],
     )
-    data.to_csv(output_path, index=False)
-    
+    df.to_csv(csv_path, index=False)
+    plot(df, plot_path)
 
 def main(**kwargs):
-    read_files(kwargs["input_path"], kwargs["output_path"])
+    read_files(kwargs["input_path"], kwargs["csv_path"], kwargs["plot_path"])
