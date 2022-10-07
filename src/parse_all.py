@@ -42,6 +42,11 @@ if __name__ == "__main__":
     plot_filename = plot_filename_wo_ext + ".png"
     plot_path = os.path.join(plot_directory, plot_filename)
 
+    hist_directory = os.path.join(input_directory, "report")
+    hist_filename_wo_ext = input_filename_wo_ext + "_hist"
+    hist_filename = hist_filename_wo_ext + ".png"
+    hist_path = os.path.join(hist_directory, hist_filename)
+
     svg_directory = os.path.join(input_directory, "report")
     svg_filename_wo_ext = input_filename_wo_ext
     svg_filename = svg_filename_wo_ext + ".svg"
@@ -66,6 +71,11 @@ if __name__ == "__main__":
         "plot_directory":       plot_directory,
         "plot_filename":        plot_filename,
         "plot_filename_wo_ext": plot_filename_wo_ext,
+
+        "hist_path":            hist_path,
+        "hist_directory":       hist_directory,
+        "hist_filename":        hist_filename,
+        "hist_filename_wo_ext": hist_filename_wo_ext,
 
         "svg_path":            svg_path,
         "svg_directory":       svg_directory,
