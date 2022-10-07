@@ -12,6 +12,7 @@ def read_files(input_path, csv_path, plot_path):
         names_old=["position (mm)", "height (μm)"], names_new=["position (μm)", "height (nm)"], unit_conversion_coefficients=[1, 1],
     )
     df.to_csv(csv_path, index=False)
+    set_min_0(df)
     plot(df, plot_path)
 
 def main(**kwargs):

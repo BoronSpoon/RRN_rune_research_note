@@ -12,6 +12,11 @@ def pd_read_csv(filename, encoding, sep, header_count, names_old, names_new, uni
             df_new[name_new] = df_old[name_old]*unit_conversion_coefficient
     return df_new
 
+def set_min_0(df): # set minimum value of column to 0
+    keys = df.keys()
+    df[keys[1]] -= min(df[keys[1]])
+    return df
+
 def plot(df, plot_path):
     ax = plt.gca()
     keys = df.keys()
