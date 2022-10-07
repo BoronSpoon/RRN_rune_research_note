@@ -7,6 +7,7 @@ from ezdxf.addons.drawing.config import Configuration
 import re
 import os
 import io
+from misc import *
 
 # DXF
 def parse_autocad(path, output_path):

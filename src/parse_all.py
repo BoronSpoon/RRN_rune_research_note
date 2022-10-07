@@ -5,18 +5,20 @@ import parse_dxf
 import parse_oscilloscope
 import parse_profilometer
 import parse_vsm
+from misc import *
+#import parse_pptx
 
 def read_files(**kwargs):
-    with open(path, "r") as f:
+    with open(kwargs["input_path"], "r") as f:
         lines = f.readlines()
 
-    if ".txt" in filename or ".TXT" in filename: # profilometer
+    if ".txt" in kwargs["input_filename"] or ".TXT" in kwargs["input_filename"]: # profilometer
         parse_profilometer.main(**kwargs)
-    elif ".Dat" in filename: # VSM
+    elif ".Dat" in kwargs["input_filename"]: # VSM
         parse_vsm.main(**kwargs)
-    elif ".pptx" in filename or ".PPTX" in filename: # pptx
-        parse_pptx.main(**kwargs)
-    elif ".dxf" in filename or ".DXF" in filename: # autocad DXF
+    #elif ".pptx" in filename or ".PPTX" in filename: # pptx
+    #    parse_pptx.main(**kwargs)
+    elif ".dxf" in kwargs["input_filename"] or ".DXF" in kwargs["input_filename"]: # autocad DXF
         parse_dxf.main(**kwargs)
     elif "DL9000" in lines[1]: # oscilloscope_electrical
         parse_oscilloscope.main(**kwargs)
@@ -36,7 +38,7 @@ if __name__ == "__main__":
     output_path = os.path.join(output_directory, output_filename)
     if not os.path.isdir(output_directory):
         os.mkdir(output_directory)
-    read_files({
+    read_files(**{
         "input_path": input_path,
         "input_directory": input_directory,
         "input_filename": input_filename,
