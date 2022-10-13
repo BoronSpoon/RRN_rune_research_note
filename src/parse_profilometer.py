@@ -13,6 +13,7 @@ def read_files(input_path, csv_path, plot_path, hist_path, interactive=False):
     )
     df.to_csv(csv_path, index=False)
     set_min_0(df)
+    df = remove_outlier(df)
     p = Plot(df, interactive=interactive)
     p.plot(plot_path)
     p.hist(hist_path)

@@ -34,6 +34,17 @@ def set_rcparams():
     }
     plt.rcParams.update(plot_params)
 
+
+def remove_outlier(df):
+    keys = df.keys()
+    qx_05 = df[keys[0]].quantile(0.05)
+    qx_95 = df[keys[0]].quantile(0.95)
+    qy_05 = df[keys[1]].quantile(0.05)
+    qy_95 = df[keys[1]].quantile(0.95)
+    df = df[(df[keys[0]] > qx_05) & (df[keys[0]] < qx_95)]
+    df = df[(df[keys[1]] > qy_05) & (df[keys[1]] < qy_95)]
+    return df
+
 class Plot():
     def __init__(self, df, interactive=False):
         self.df = df
@@ -74,15 +85,16 @@ class Plot():
 
     def hist(self, hist_path):
         set_rcparams()
-        ax = plt.gca()
+        self.ax = plt.gca()
         keys = self.df.keys()
+        print(self.df[keys[1]].max())
         if len(keys) == 2: # dont need legend for two axis
-            self.df.plot.hist(column=keys[1], bins=100, alpha=0.5, legend=None, ax=ax)
-            ax.set(xlabel=keys[1])
+            self.df.hist(column=keys[1], bins=100, alpha=0.5, legend=None, ax=self.ax)
+            self.ax.set(xlabel=keys[1])
         else:
-            self.df.plot.hist(column=keys[1:], bins=100, alpha=1, ax=ax)
+            self.df.hist(column=keys[1:], bins=100, alpha=1, ax=self.ax)
 
-        annotate_top_n(self.df, ax, top_n=5)
+        annotate_top_n(self.df, self.ax, top_n=5)
         plt.savefig(hist_path, bbox_inches="tight")
         plt.cla()
 
