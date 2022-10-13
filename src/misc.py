@@ -34,7 +34,7 @@ def set_rcparams():
     }
     plt.rcParams.update(plot_params)
 
-def plot(df, plot_path):
+def plot(df, plot_path, show=False):
     set_rcparams()
     ax = plt.gca()
     keys = df.keys()
@@ -45,9 +45,10 @@ def plot(df, plot_path):
         df.plot(kind="line", x=keys[0], y=keys[1], ax=ax)
 
     plt.savefig(plot_path, bbox_inches="tight")
+    if show: plt.show()
     plt.cla()
 
-def hist(df, hist_path):
+def hist(df, hist_path, show=False):
     set_rcparams()
     ax = plt.gca()
     keys = df.keys()
@@ -59,6 +60,7 @@ def hist(df, hist_path):
 
     annotate_top_n(df, ax, top_n=5)
     plt.savefig(hist_path, bbox_inches="tight")
+    if show: plt.show()
     plt.cla()
 
 # https://stackoverflow.com/questions/43374920/how-to-automatically-annotate-maximum-value-in-pyplot
