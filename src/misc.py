@@ -91,6 +91,8 @@ class Plot():
         if len(keys) == 2: # dont need legend for two axis
             self.df.hist(column=keys[1], bins=100, alpha=0.5, legend=None, ax=self.ax)
             self.ax.set(xlabel=keys[1])
+            self.ax.set(ylabel="Frequency")
+            self.ax.set_title("")
         else:
             self.df.hist(column=keys[1:], bins=100, alpha=1, ax=self.ax)
 
