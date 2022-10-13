@@ -4,7 +4,6 @@ import argparse, os, sys, io
 import parse_dxf
 import parse_oscilloscope
 import parse_profilometer
-import parse_profilometer_interactive
 import parse_vsm
 from misc import *
 #import parse_pptx
@@ -16,7 +15,7 @@ def read_files(**kwargs):
     if ".txt" in kwargs["input_filename"] or ".TXT" in kwargs["input_filename"]: # profilometer
         parse_profilometer.main(**kwargs)
     if "_i.txt" in kwargs["input_filename"] or "i_.TXT" in kwargs["input_filename"]: # profilometer
-        parse_profilometer_interactive.main(**kwargs)
+        parse_profilometer.main(**kwargs, interactive=True)
     elif ".Dat" in kwargs["input_filename"]: # VSM
         parse_vsm.main(**kwargs)
     #elif ".pptx" in filename or ".PPTX" in filename: # pptx

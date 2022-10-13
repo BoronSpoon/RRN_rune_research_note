@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from misc import *
 
-def read_files(input_path, csv_path, plot_path, hist_path):
+def read_files(input_path, csv_path, plot_path, hist_path, interactive=False):
     with open(input_path, "r") as f:
         lines = f.readlines()
 
@@ -13,8 +13,13 @@ def read_files(input_path, csv_path, plot_path, hist_path):
     )
     df.to_csv(csv_path, index=False)
     set_min_0(df)
-    plot(df, plot_path)
-    hist(df, hist_path)
+    p = Plot(df, interactive=interactive)
+    p.plot(plot_path)
+    p.hist(hist_path)
 
 def main(**kwargs):
-    read_files(kwargs["input_path"], kwargs["csv_path"], kwargs["plot_path"], kwargs["hist_path"])
+    if "interactive" in kwargs.keys():
+        interactive = kwargs["interactive"]
+    else:
+        interactive=False
+    read_files(kwargs["input_path"], kwargs["csv_path"], kwargs["plot_path"], kwargs["hist_path"], interactive=interactive)
