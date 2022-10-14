@@ -22,5 +22,5 @@ def main(**kwargs):
     if "interactive" in kwargs.keys():
         interactive = kwargs["interactive"]
     else:
-        interactive=False
+        interactive = False
     read_files(kwargs["input_path"], kwargs["csv_path"], kwargs["plot_path"], kwargs["hist_path"], interactive=interactive)

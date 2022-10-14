@@ -4,6 +4,7 @@ import argparse, os, sys, io
 import parse_dxf
 import parse_oscilloscope
 import parse_profilometer
+import parse_tabular
 import parse_vsm
 from misc import *
 #import parse_pptx
@@ -12,9 +13,13 @@ def read_files(**kwargs):
     with open(kwargs["input_path"], "r") as f:
         lines = f.readlines()
 
-    if ".txt" in kwargs["input_filename"] or ".TXT" in kwargs["input_filename"]: # profilometer
+    if "_m1.txt" in kwargs["input_filename"] or "_m1.TXT" in kwargs["input_filename"]: # manual plot with tabular data and linear regression
+        parse_tabular.main(**kwargs, linear_regression=True)
+    elif "_m.txt" in kwargs["input_filename"] or "_m.TXT" in kwargs["input_filename"]: # manual plot with tabular data
+        parse_tabular.main(**kwargs)
+    elif ".txt" in kwargs["input_filename"] or ".TXT" in kwargs["input_filename"]: # profilometer
         parse_profilometer.main(**kwargs)
-    if "_i.txt" in kwargs["input_filename"] or "i_.TXT" in kwargs["input_filename"]: # profilometer
+    elif "_i.txt" in kwargs["input_filename"] or "i_.TXT" in kwargs["input_filename"]: # profilometer
         parse_profilometer.main(**kwargs, interactive=True)
     elif ".Dat" in kwargs["input_filename"]: # VSM
         parse_vsm.main(**kwargs)
