@@ -81,6 +81,7 @@ class Plot():
             plt.show()
             if self.xlim is not None and self.ylim is not None:
                 self.crop_data()
+            self.plot_(plot_path)
         plt.cla()
 
     def hist(self, hist_path):
