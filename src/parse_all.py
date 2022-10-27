@@ -14,7 +14,7 @@ def read_files(**kwargs):
 
     if ".txt" in kwargs["input_filename"] or ".TXT" in kwargs["input_filename"]: # profilometer
         parse_profilometer.main(**kwargs)
-    if "_i.txt" in kwargs["input_filename"] or "i_.TXT" in kwargs["input_filename"]: # profilometer
+    if "_i.txt" in kwargs["input_filename"] or "_i.TXT" in kwargs["input_filename"]: # profilometer
         parse_profilometer.main(**kwargs, interactive=True)
     elif ".Dat" in kwargs["input_filename"]: # VSM
         parse_vsm.main(**kwargs)
