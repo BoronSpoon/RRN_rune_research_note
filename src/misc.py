@@ -51,24 +51,27 @@ def remove_outlier(df):
     return df
 
 class Plot():
-    def __init__(self, df, interactive=False):
+    def __init__(self, df, interactive=False, linear_regression=False):
         self.df = df
         self.interactive = interactive
+        self.linear_regression = linear_regression
 
-    def plot_(self, plot_path, linear_regression=False):
+    def plot_(self, plot_path):
         set_rcparams()
         self.ax = plt.gca()
         keys = self.df.keys()
+        xmin, ymax = min(self.df[keys[0]]), max(self.df[keys[1]])
         if len(keys) == 2: # dont need legend for two axis
-            if linear_regression:
+            if self.linear_regression:
                 self.df.plot.scatter(x=keys[0], y=keys[1], legend=None, ax=self.ax)
-                #fit_y, r2 = self.fit_linear_regression()
-                #self.df.plot(kind="line", x=keys[0], y=fit_y, legend=None, ax=self.ax)
+                params, r2 = self.fit_linear_regression()
+                self.df.plot(kind="line", x=keys[0], y="fit_y", legend=None, ax=self.ax, style="-")
+                self.ax.text(xmin, ymax, f"{params[0]:.3f}x+{params[1]:.3f}, r2={r2:.3f}", horizontalalignment="left", verticalalignment="top")
             else:
                 self.df.plot(kind="line", x=keys[0], y=keys[1], legend=None, ax=self.ax)
             self.ax.set(ylabel=keys[1])
         else:
-            if linear_regression:
+            if self.linear_regression:
                 self.df.scatter(x=keys[0], y=keys[1], ax=self.ax, fit_reg=True)
             else:
                 self.df.plot(kind="line", x=keys[0], y=keys[1], ax=self.ax)
@@ -81,17 +84,20 @@ class Plot():
 
     def fit_linear_regression(self):
         keys = self.df.keys()
-        x, y = self.df[keys[0]], self.df[keys[1]]
-        model = LinearRegression().fit(x, y)
+        x, y = self.df[keys[0]].to_numpy().reshape(-1, 1), self.df[keys[1]].to_numpy().reshape(-1, 1)
+        model = LinearRegression()
+        model.fit(x, y)
         r2 = model.score(x, y)
-        return model.predict(x), r2
+        params = [model.coef_[0][0], model.intercept_[0]]
+        self.df["fit_y"] = model.predict(x)
+        return params, r2
 
     def crop_data(self):
         keys = self.df.keys()
         self.df = self.df[(self.df[keys[0]] > self.xlim[0]) & (self.df[keys[0]] < self.xlim[1]) & (self.df[keys[1]] > self.ylim[0]) & (self.df[keys[1]] < self.ylim[1])]
 
-    def plot(self, plot_path, linear_regression=False):
-        self.plot_(plot_path, linear_regression=linear_regression)
+    def plot(self, plot_path):
+        self.plot_(plot_path)
         if self.interactive:
             self.xlim=None
             self.ylim=None

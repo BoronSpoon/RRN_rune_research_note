@@ -9,8 +9,8 @@ def read_files(input_path, csv_path, plot_path, interactive=False, linear_regres
         rename_columns=False,
     )
     df.to_csv(csv_path, index=False)
-    p = Plot(df, interactive=interactive)
-    p.plot(plot_path, linear_regression=linear_regression)
+    p = Plot(df, interactive=interactive, linear_regression=linear_regression)
+    p.plot(plot_path)
 
 def main(**kwargs):
     interactive = kwargs["interactive"] if "interactive" in kwargs.keys() else False
