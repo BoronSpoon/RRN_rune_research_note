@@ -17,10 +17,10 @@ def read_files(**kwargs):
         parse_tabular.main(**kwargs, linear_regression=True)
     elif "_m.txt" in kwargs["input_filename"] or "_m.TXT" in kwargs["input_filename"]: # manual plot with tabular data
         parse_tabular.main(**kwargs)
-    elif ".txt" in kwargs["input_filename"] or ".TXT" in kwargs["input_filename"]: # profilometer
-        parse_profilometer.main(**kwargs)
     elif "_i.txt" in kwargs["input_filename"] or "_i.TXT" in kwargs["input_filename"]: # profilometer
         parse_profilometer.main(**kwargs, interactive=True)
+    elif ".txt" in kwargs["input_filename"] or ".TXT" in kwargs["input_filename"]: # profilometer
+        parse_profilometer.main(**kwargs)
     elif ".Dat" in kwargs["input_filename"]: # VSM
         parse_vsm.main(**kwargs)
     #elif ".pptx" in filename or ".PPTX" in filename: # pptx
