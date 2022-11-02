@@ -5,7 +5,7 @@ from codecs import open
 from os import path
 import re
 
-package_name = "rrn"
+package_name = "vern"
 
 root_dir = path.abspath(path.dirname(__file__))
 
