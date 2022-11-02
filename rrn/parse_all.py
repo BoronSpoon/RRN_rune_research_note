@@ -1,6 +1,5 @@
 # profilometer
-import numpy as np
-import argparse, os, sys, io
+import os
 import parse_dxf
 import parse_oscilloscope
 import parse_profilometer
@@ -36,72 +35,69 @@ def read_files(**kwargs):
     elif "DL9000" in lines[1]: # oscilloscope_electrical
         parse_oscilloscope.main(**kwargs)
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("path", help="input path")
-    args = parser.parse_args()
-    input_path = args.path
-    input_directory = os.path.dirname(input_path)
-    input_filename = os.path.basename(input_path)
-    input_filename_wo_ext = os.path.splitext(input_filename)[0]
+class rrn():
+    def __init__(input_path):
+        input_directory = os.path.dirname(input_path)
+        input_filename = os.path.basename(input_path)
+        input_filename_wo_ext = os.path.splitext(input_filename)[0]
 
-    txt_directory = input_directory
-    txt_filename_wo_ext = input_filename_wo_ext
-    txt_filename = txt_filename_wo_ext + ".txt"
-    txt_path = os.path.join(txt_directory, txt_filename)
+        txt_directory = input_directory
+        txt_filename_wo_ext = input_filename_wo_ext
+        txt_filename = txt_filename_wo_ext + ".txt"
+        txt_path = os.path.join(txt_directory, txt_filename)
 
-    csv_directory = os.path.join(input_directory, "report")
-    csv_filename_wo_ext = input_filename_wo_ext
-    csv_filename = csv_filename_wo_ext + ".csv"
-    csv_path = os.path.join(csv_directory, csv_filename)
+        csv_directory = os.path.join(input_directory, "report")
+        csv_filename_wo_ext = input_filename_wo_ext
+        csv_filename = csv_filename_wo_ext + ".csv"
+        csv_path = os.path.join(csv_directory, csv_filename)
 
-    plot_directory = os.path.join(input_directory, "report")
-    plot_filename_wo_ext = input_filename_wo_ext
-    plot_filename = plot_filename_wo_ext + ".png"
-    plot_path = os.path.join(plot_directory, plot_filename)
+        plot_directory = os.path.join(input_directory, "report")
+        plot_filename_wo_ext = input_filename_wo_ext
+        plot_filename = plot_filename_wo_ext + ".png"
+        plot_path = os.path.join(plot_directory, plot_filename)
 
-    hist_directory = os.path.join(input_directory, "report")
-    hist_filename_wo_ext = input_filename_wo_ext + "_hist"
-    hist_filename = hist_filename_wo_ext + ".png"
-    hist_path = os.path.join(hist_directory, hist_filename)
+        hist_directory = os.path.join(input_directory, "report")
+        hist_filename_wo_ext = input_filename_wo_ext + "_hist"
+        hist_filename = hist_filename_wo_ext + ".png"
+        hist_path = os.path.join(hist_directory, hist_filename)
 
-    svg_directory = os.path.join(input_directory, "report")
-    svg_filename_wo_ext = input_filename_wo_ext
-    svg_filename = svg_filename_wo_ext + ".svg"
-    svg_path = os.path.join(svg_directory, svg_filename)
+        svg_directory = os.path.join(input_directory, "report")
+        svg_filename_wo_ext = input_filename_wo_ext
+        svg_filename = svg_filename_wo_ext + ".svg"
+        svg_path = os.path.join(svg_directory, svg_filename)
 
-    for directory in [csv_directory, plot_directory, svg_directory]:
-        if not os.path.isdir(directory):
-            os.mkdir(directory)
-            
-    read_files(**{
-        "input_path":            input_path,
-        "input_directory":       input_directory,
-        "input_filename":        input_filename,
-        "input_filename_wo_ext": input_filename_wo_ext,
+        for directory in [csv_directory, plot_directory, svg_directory]:
+            if not os.path.isdir(directory):
+                os.mkdir(directory)
+                
+        read_files(**{
+            "input_path":            input_path,
+            "input_directory":       input_directory,
+            "input_filename":        input_filename,
+            "input_filename_wo_ext": input_filename_wo_ext,
 
-        "txt_path":            txt_path,
-        "txt_directory":       txt_directory,
-        "txt_filename":        txt_filename,
-        "txt_filename_wo_ext": txt_filename_wo_ext,
+            "txt_path":            txt_path,
+            "txt_directory":       txt_directory,
+            "txt_filename":        txt_filename,
+            "txt_filename_wo_ext": txt_filename_wo_ext,
 
-        "csv_path":            csv_path,
-        "csv_directory":       csv_directory,
-        "csv_filename":        csv_filename,
-        "csv_filename_wo_ext": csv_filename_wo_ext,
+            "csv_path":            csv_path,
+            "csv_directory":       csv_directory,
+            "csv_filename":        csv_filename,
+            "csv_filename_wo_ext": csv_filename_wo_ext,
 
-        "plot_path":            plot_path,
-        "plot_directory":       plot_directory,
-        "plot_filename":        plot_filename,
-        "plot_filename_wo_ext": plot_filename_wo_ext,
+            "plot_path":            plot_path,
+            "plot_directory":       plot_directory,
+            "plot_filename":        plot_filename,
+            "plot_filename_wo_ext": plot_filename_wo_ext,
 
-        "hist_path":            hist_path,
-        "hist_directory":       hist_directory,
-        "hist_filename":        hist_filename,
-        "hist_filename_wo_ext": hist_filename_wo_ext,
+            "hist_path":            hist_path,
+            "hist_directory":       hist_directory,
+            "hist_filename":        hist_filename,
+            "hist_filename_wo_ext": hist_filename_wo_ext,
 
-        "svg_path":            svg_path,
-        "svg_directory":       svg_directory,
-        "svg_filename":        svg_filename,
-        "svg_filename_wo_ext": svg_filename_wo_ext,
-    })
+            "svg_path":            svg_path,
+            "svg_directory":       svg_directory,
+            "svg_filename":        svg_filename,
+            "svg_filename_wo_ext": svg_filename_wo_ext,
+        })
