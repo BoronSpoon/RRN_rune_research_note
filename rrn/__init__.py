@@ -7,4 +7,4 @@ __author__       = 'BoronSpoon'
 __author_email__ = 'rayanticlimactic@gmail.com'
 __url__          = 'http://github.com/BoronSpoon/RRN_rune_research_note'
 
-__all__ = ['rrn', ...]
+__all__ = ['parse_all']
