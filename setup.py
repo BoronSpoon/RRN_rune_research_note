@@ -14,7 +14,7 @@ def _requirements():
 
 
 def _test_requirements():
-    return [name.rstrip() for name in open(path.join(root_dir, 'test-requirements.txt')).readlines()]
+    return [name.rstrip() for name in open(path.join(root_dir, 'requirements.txt')).readlines()]
 
 with open(path.join(root_dir, package_name, '__init__.py')) as f:
     init_text = f.read()
