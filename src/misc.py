@@ -1,15 +1,20 @@
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
+from sklearn.linear_model import LinearRegression
 
-def pd_read_csv(filename, encoding, sep, header_count, names_old, names_new, unit_conversion_coefficients, use_index=False, name_index=0, index_coefficient=0):
+def pd_read_csv(filename, encoding, sep, header_count, names_old=None, names_new=None, unit_conversion_coefficients=None, use_index=False, name_index=0, index_coefficient=0, rename_columns=True):
     df_old = pd.read_csv(filename, header=header_count, names=names_old, sep=sep, encoding=encoding, engine="python")
     df_new = pd.DataFrame()
     if use_index:
         df_new[name_index] = np.arange(df_old.shape[0])*index_coefficient
-    for name_old, name_new, unit_conversion_coefficient in zip(names_old, names_new, unit_conversion_coefficients):
-        if "erase" not in name_new: # erase unnecessary columns
-            df_new[name_new] = df_old[name_old]*unit_conversion_coefficient
+    if rename_columns: # rename the columns
+        for name_old, name_new, unit_conversion_coefficient in zip(names_old, names_new, unit_conversion_coefficients):
+            if "erase" not in name_new: # erase unnecessary columns
+                df_new[name_new] = df_old[name_old]*unit_conversion_coefficient
+    else: # reuse name of columns
+        for name in df_old.columns:
+            df_new[name] = df_old[name]
     return df_new
 
 def set_min_0(df): # set minimum value of column to 0
@@ -46,26 +51,46 @@ def remove_outlier(df):
     return df
 
 class Plot():
-    def __init__(self, df, interactive=False):
+    def __init__(self, df, interactive=False, linear_regression=False):
         self.df = df
         self.interactive = interactive
+        self.linear_regression = linear_regression
 
     def plot_(self, plot_path):
         set_rcparams()
         self.ax = plt.gca()
         keys = self.df.keys()
+        xmin, ymax = min(self.df[keys[0]]), max(self.df[keys[1]])
         if len(keys) == 2: # dont need legend for two axis
-            self.df.plot(kind="line", x=keys[0], y=keys[1], legend=None, ax=self.ax)
+            if self.linear_regression:
+                self.df.plot.scatter(x=keys[0], y=keys[1], legend=None, ax=self.ax)
+                params, r2 = self.fit_linear_regression()
+                self.df.plot(kind="line", x=keys[0], y="fit_y", legend=None, ax=self.ax, style="-")
+                self.ax.text(xmin, ymax, f"{params[0]:.3f}x+{params[1]:.3f}, r2={r2:.3f}", horizontalalignment="left", verticalalignment="top")
+            else:
+                self.df.plot(kind="line", x=keys[0], y=keys[1], legend=None, ax=self.ax)
             self.ax.set(ylabel=keys[1])
         else:
-            self.df.plot(kind="line", x=keys[0], y=keys[1], ax=self.ax)
+            if self.linear_regression:
+                self.df.scatter(x=keys[0], y=keys[1], ax=self.ax, fit_reg=True)
+            else:
+                self.df.plot(kind="line", x=keys[0], y=keys[1], ax=self.ax)
         plt.savefig(plot_path, bbox_inches="tight")
-        print(plot_path)
  
     def on_xlims_change(self, event_ax):
         self.xlim = event_ax.get_xlim()
     def on_ylims_change(self, event_ax):
         self.ylim = event_ax.get_ylim()
+
+    def fit_linear_regression(self):
+        keys = self.df.keys()
+        x, y = self.df[keys[0]].to_numpy().reshape(-1, 1), self.df[keys[1]].to_numpy().reshape(-1, 1)
+        model = LinearRegression()
+        model.fit(x, y)
+        r2 = model.score(x, y)
+        params = [model.coef_[0][0], model.intercept_[0]]
+        self.df["fit_y"] = model.predict(x)
+        return params, r2
 
     def crop_data(self):
         keys = self.df.keys()

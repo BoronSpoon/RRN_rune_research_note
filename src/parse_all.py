@@ -4,18 +4,29 @@ import argparse, os, sys, io
 import parse_dxf
 import parse_oscilloscope
 import parse_profilometer
+import parse_tabular
 import parse_vsm
+import parse_mat
 from misc import *
 #import parse_pptx
 
 def read_files(**kwargs):
     with open(kwargs["input_path"], "r") as f:
-        lines = f.readlines()
+        try:
+            lines = f.readlines()
+        except:
+            lines = None
 
-    if ".txt" in kwargs["input_filename"] or ".TXT" in kwargs["input_filename"]: # profilometer
-        parse_profilometer.main(**kwargs)
-    if "_i.txt" in kwargs["input_filename"] or "_i.TXT" in kwargs["input_filename"]: # profilometer
+    if ".mat" in kwargs["input_filename"] or "_m.MAT" in kwargs["input_filename"]: # convert .mat to tabular data
+        parse_mat.main(**kwargs)
+    elif "_m1.txt" in kwargs["input_filename"] or "_m1.TXT" in kwargs["input_filename"]: # manual plot with tabular data and linear regression
+        parse_tabular.main(**kwargs, linear_regression=True)
+    elif "_m.txt" in kwargs["input_filename"] or "_m.TXT" in kwargs["input_filename"]: # manual plot with tabular data
+        parse_tabular.main(**kwargs)
+    elif "_i.txt" in kwargs["input_filename"] or "_i.TXT" in kwargs["input_filename"]: # profilometer
         parse_profilometer.main(**kwargs, interactive=True)
+    elif ".txt" in kwargs["input_filename"] or ".TXT" in kwargs["input_filename"]: # profilometer
+        parse_profilometer.main(**kwargs)
     elif ".Dat" in kwargs["input_filename"]: # VSM
         parse_vsm.main(**kwargs)
     #elif ".pptx" in filename or ".PPTX" in filename: # pptx
@@ -33,6 +44,11 @@ if __name__ == "__main__":
     input_directory = os.path.dirname(input_path)
     input_filename = os.path.basename(input_path)
     input_filename_wo_ext = os.path.splitext(input_filename)[0]
+
+    txt_directory = input_directory
+    txt_filename_wo_ext = input_filename_wo_ext
+    txt_filename = txt_filename_wo_ext + ".txt"
+    txt_path = os.path.join(txt_directory, txt_filename)
 
     csv_directory = os.path.join(input_directory, "report")
     csv_filename_wo_ext = input_filename_wo_ext
@@ -63,6 +79,11 @@ if __name__ == "__main__":
         "input_directory":       input_directory,
         "input_filename":        input_filename,
         "input_filename_wo_ext": input_filename_wo_ext,
+
+        "txt_path":            txt_path,
+        "txt_directory":       txt_directory,
+        "txt_filename":        txt_filename,
+        "txt_filename_wo_ext": txt_filename_wo_ext,
 
         "csv_path":            csv_path,
         "csv_directory":       csv_directory,
