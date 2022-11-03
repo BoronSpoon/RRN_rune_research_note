@@ -1,6 +1,4 @@
-install
-#######
-pip install -r requirements.txt
+VERN: Very Easy Research Note
 
 how to use
 ##########
