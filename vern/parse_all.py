@@ -36,7 +36,7 @@ def read_files(**kwargs):
         parse_oscilloscope(**kwargs)
 
 class Vern():
-    def __init__(input_path):
+    def __init__(self, input_path):
         input_directory = os.path.dirname(input_path)
         input_filename = os.path.basename(input_path)
         input_filename_wo_ext = os.path.splitext(input_filename)[0]
