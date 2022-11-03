@@ -35,7 +35,7 @@ def read_files(**kwargs):
     elif "DL9000" in lines[1]: # oscilloscope_electrical
         parse_oscilloscope.main(**kwargs)
 
-class rrn():
+class vern():
     def __init__(input_path):
         input_directory = os.path.dirname(input_path)
         input_filename = os.path.basename(input_path)

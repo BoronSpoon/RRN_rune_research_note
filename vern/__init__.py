@@ -5,6 +5,6 @@ __version__      = '1.0.0'
 __license__      = 'MIT License'
 __author__       = 'boronspoon'
 __author_email__ = 'rayanticlimactic@gmail.com'
-__url__          = 'http://github.com/BoronSpoon/RRN_rune_research_note'
+__url__          = 'http://github.com/BoronSpoon/vern'
 
 __all__ = ['parse_all']
