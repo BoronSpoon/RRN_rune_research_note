@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 from misc import *
+__all__ = ['parse_profilometer']
 
 def read_files(input_path, csv_path, plot_path, hist_path, interactive=False):
     with open(input_path, "r") as f:
@@ -18,7 +19,7 @@ def read_files(input_path, csv_path, plot_path, hist_path, interactive=False):
     p.plot(plot_path)
     p.hist(hist_path)
 
-def main(**kwargs):
+def parse_profilometer(**kwargs):
     if "interactive" in kwargs.keys():
         interactive = kwargs["interactive"]
     else:

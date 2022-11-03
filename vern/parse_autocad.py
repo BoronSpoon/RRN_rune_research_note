@@ -8,9 +8,10 @@ import re
 import os
 import io
 from misc import *
+__all__ = ['parse_autocad']
 
 # DXF
-def parse_autocad(path, output_path):
+def parse_autocad_(path, output_path):
     # https://stackoverflow.com/questions/58906149/python-converting-dxf-files-to-pdf-or-png-or-jpeg
     print("parsing autocad")
 
@@ -52,5 +53,5 @@ def svg_fill(buffer, output_path): # fill polylines in svg for visibility improv
     with open(output_path, "w") as f:
         f.writelines(line+"\n" for line in lines)
 
-def main(**kwargs):
-    parse_autocad(kwargs["input_path"], kwargs["output_path"])
+def parse_autocad(**kwargs):
+    parse_autocad_(kwargs["input_path"], kwargs["output_path"])

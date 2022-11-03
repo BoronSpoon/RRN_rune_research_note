@@ -1,13 +1,13 @@
 # profilometer
 import os
-import parse_dxf
-import parse_oscilloscope
-import parse_profilometer
-import parse_tabular
-import parse_vsm
-import parse_mat
+from parse_autocad import *
+from parse_oscilloscope import *
+from parse_profilometer import *
+from parse_tabular import *
+from parse_vsm import *
+from parse_mat import *
 from misc import *
-#import parse_pptx
+__all__ = ['Vern']
 
 def read_files(**kwargs):
     with open(kwargs["input_path"], "r") as f:
@@ -17,25 +17,25 @@ def read_files(**kwargs):
             lines = None
 
     if ".mat" in kwargs["input_filename"] or "_m.MAT" in kwargs["input_filename"]: # convert .mat to tabular data
-        parse_mat.main(**kwargs)
+        parse_mat(**kwargs)
     elif "_m1.txt" in kwargs["input_filename"] or "_m1.TXT" in kwargs["input_filename"]: # manual plot with tabular data and linear regression
-        parse_tabular.main(**kwargs, linear_regression=True)
+        parse_tabular(**kwargs, linear_regression=True)
     elif "_m.txt" in kwargs["input_filename"] or "_m.TXT" in kwargs["input_filename"]: # manual plot with tabular data
-        parse_tabular.main(**kwargs)
+        parse_tabular(**kwargs)
     elif "_i.txt" in kwargs["input_filename"] or "_i.TXT" in kwargs["input_filename"]: # profilometer
-        parse_profilometer.main(**kwargs, interactive=True)
+        parse_profilometer(**kwargs, interactive=True)
     elif ".txt" in kwargs["input_filename"] or ".TXT" in kwargs["input_filename"]: # profilometer
-        parse_profilometer.main(**kwargs)
+        parse_profilometer(**kwargs)
     elif ".Dat" in kwargs["input_filename"]: # VSM
-        parse_vsm.main(**kwargs)
+        parse_vsm(**kwargs)
     #elif ".pptx" in filename or ".PPTX" in filename: # pptx
     #    parse_pptx.main(**kwargs)
     elif ".dxf" in kwargs["input_filename"] or ".DXF" in kwargs["input_filename"]: # autocad DXF
-        parse_dxf.main(**kwargs)
+        parse_autocad(**kwargs)
     elif "DL9000" in lines[1]: # oscilloscope_electrical
-        parse_oscilloscope.main(**kwargs)
+        parse_oscilloscope(**kwargs)
 
-class vern():
+class Vern():
     def __init__(input_path):
         input_directory = os.path.dirname(input_path)
         input_filename = os.path.basename(input_path)

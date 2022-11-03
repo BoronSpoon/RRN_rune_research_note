@@ -2,6 +2,7 @@
 import numpy as np
 import pandas as pd
 from misc import *
+__all__ = ['parse_oscilloscope']
 
 def read_files(input_path, output_path):
     with open(input_path, "r") as f:
@@ -15,5 +16,5 @@ def read_files(input_path, output_path):
     df.to_csv(output_path, index=False)
     plot(df)
 
-def main(**kwargs):
+def parse_oscilloscope(**kwargs):
     read_files(kwargs["input_path"], kwargs["output_path"])
