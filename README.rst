@@ -5,16 +5,20 @@ how to use
 * create the following two files on your location of choice (desktop may be a good place)
 * drag and drop to-be processed files on the run_vern.py
 
-* run_vern.bat
+run_vern.bat
+
 .. code-block:: bat
+
     :loop
     if not "%~nx1"=="" (
     python run_vern.py %~f1 & shift & goto loop
     )
     pause
 
-* run_vern.py
+run_vern.py
+
 .. code-block:: python
+
     from vern import *
     import argparse
     parser = argparse.ArgumentParser()
