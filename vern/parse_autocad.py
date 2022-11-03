@@ -7,7 +7,7 @@ from ezdxf.addons.drawing.config import Configuration
 import re
 import os
 import io
-from misc import *
+from .misc import *
 __all__ = ['parse_autocad']
 
 # DXF

@@ -1,7 +1,7 @@
 # profilometer
 import numpy as np
 import pandas as pd
-from misc import *
+from .misc import *
 __all__ = ['parse_tabular']
 
 def read_files(input_path, csv_path, plot_path, interactive=False, linear_regression=False):

@@ -1,7 +1,7 @@
 # profilometer
 import numpy as np
 import pandas as pd
-from misc import *
+from .misc import *
 import mat73
 __all__ = ['parse_mat']
 

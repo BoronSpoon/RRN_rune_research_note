@@ -1,12 +1,12 @@
 # profilometer
 import os
-from parse_autocad import *
-from parse_oscilloscope import *
-from parse_profilometer import *
-from parse_tabular import *
-from parse_vsm import *
-from parse_mat import *
-from misc import *
+from .parse_autocad import *
+from .parse_oscilloscope import *
+from .parse_profilometer import *
+from .parse_tabular import *
+from .parse_vsm import *
+from .parse_mat import *
+from .misc import *
 __all__ = ['Vern']
 
 def read_files(**kwargs):

@@ -1,7 +1,7 @@
 # profilometer
 import numpy as np
 import pandas as pd
-from misc import *
+from .misc import *
 __all__ = ['parse_vsm']
 
 def read_files(input_path, output_path):

@@ -1,5 +1,5 @@
 import os, glob
-from parse_all import *
+from .parse_all import *
 
 __copyright__    = 'Copyright (C) 2022 BoronSpoon'
 __version__      = '1.0.5'
