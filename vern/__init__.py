@@ -7,4 +7,4 @@ __author__       = 'boronspoon'
 __author_email__ = 'rayanticlimactic@gmail.com'
 __url__          = 'http://github.com/BoronSpoon/vern'
 
-__all__ = ['parse_all']
+__all__ = ['misc', 'parse_all', 'pase_dxf', 'parse_mat', 'parse_oscilloscope', 'parse_profilometer', 'parse_tabular', 'parse_vsm']
