@@ -6,9 +6,11 @@ how to use
 * drag and drop to-be processed files on the run_vern.py
 
 run_vern.bat
+============
 
 .. code-block:: bat
 
+    cd %~dp0
     :loop
     if not "%~nx1"=="" (
     python run_vern.py %~f1 & shift & goto loop
@@ -16,6 +18,7 @@ run_vern.bat
     pause
 
 run_vern.py
+===========
 
 .. code-block:: python
 
