@@ -1,8 +1,7 @@
 name: Publish to Pypi
 
 on:
-  release:
-    types: [created]
+  push
 
 jobs:
   deploy:
