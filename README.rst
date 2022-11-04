@@ -2,8 +2,11 @@ VERN: Very Easy Research Note
 
 how to use
 ##########
-* create the following two files on your location of choice (desktop may be a good place)
-* drag and drop to-be processed files on the run_vern.py
+* create the following files at (your user's) Desktop
+* execute vern_registry.bat
+* USAGE: pick either of these two
+    * (recommended): right clock on to-be processed file and select "process in VERN"
+    * drag and drop to-be processed files on the run_vern.bat
 
 run_vern.bat
 ============
@@ -28,6 +31,15 @@ run_vern.py
     parser.add_argument("path")
     args = parser.parse_args()
     Vern(args.path)
+
+vern_registry.bat
+================
+
+.. code-block:: bat
+
+    reg add HKEY_CURRENT_USER\Software\Classes\*\shell\vern /t REG_SZ /d process" "in" "VERN
+    reg add HKEY_CURRENT_USER\Software\Classes\*\shell\vern\command /t REG_EXPAND_SZ /d \^"%USERPROFILE%\Desktop\run_vern.bat\^"" "\^"%%1\^"
+    pause
 
 contribute
 ##########
