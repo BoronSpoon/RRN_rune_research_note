@@ -47,7 +47,7 @@ setup(
 
     entry_points={
         "console_scripts": [
-            "vern=parse_all.vern",
+            "vern=parse_all:vern",
         ]
     },
 
