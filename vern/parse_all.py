@@ -7,7 +7,7 @@ from .parse_tabular import *
 from .parse_vsm import *
 from .parse_mat import *
 from .misc import *
-__all__ = ['Vern']
+__all__ = ['vern']
 
 def read_files(**kwargs):
     with open(kwargs["input_path"], "r") as f:
