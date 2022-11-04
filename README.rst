@@ -5,7 +5,7 @@ how to use
 * create the following files at (your user's) Desktop
 * execute vern_registry.bat
 * USAGE: pick either of these two
-    * (recommended): right clock on to-be processed file and select "process in VERN"
+    * (recommended): right click on to-be processed file and select "process in VERN"
     * drag and drop to-be processed files on the run_vern.bat
 
 run_vern.bat
