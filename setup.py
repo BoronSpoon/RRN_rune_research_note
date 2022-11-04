@@ -45,7 +45,11 @@ setup(
     install_requires=_requirements(),
     tests_require=_test_requirements(),
 
-    scripts=["bin/run_vern", "bin/vern_registry"],
+    entry_points={
+        "console_scripts": [
+            "vern=parse_all.vern",
+        ]
+    },
 
     author=author,
     author_email=author_email,
