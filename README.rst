@@ -33,7 +33,7 @@ run_vern.py
     Vern(args.path)
 
 vern_registry.bat
-================
+=================
 
 .. code-block:: bat
 
