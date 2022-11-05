@@ -4,6 +4,7 @@ from setuptools import setup
 from codecs import open
 from os import path
 import re
+from setuptools.command.install import install                                      
 
 package_name = "vern"
 
@@ -15,6 +16,20 @@ def _requirements():
 
 def _test_requirements():
     return [name.rstrip() for name in open(path.join(root_dir, 'requirements.txt')).readlines()]
+
+class CustomInstall(install):                                                       
+    def run(self):       
+        for REG_PATH, CLASS, value in [
+            [r"Software\Classes\*\shell\vern", winreg.REG_SZ, "process in VERN"],
+            [r"Software\Classes\*\shell\vern\command", winreg.REG_EXPAND_SZ, f"\"{which('vern')}\" \"%1\""],
+        ]:
+            try:
+                winreg.CreateKey(winreg.HKEY_CURRENT_USER, REG_PATH)
+                registry_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, REG_PATH, 0, winreg.KEY_WRITE)
+                winreg.SetValueEx(registry_key, "", 0, CLASS, value)
+                winreg.CloseKey(registry_key)
+            except WindowsError:
+                pass
 
 with open(path.join(root_dir, package_name, '__init__.py')) as f:
     init_text = f.read()
@@ -29,10 +44,11 @@ assert license
 assert author
 assert author_email
 assert url
+import winreg
+from shutil import which
 
 with open('README.rst', encoding='utf-8') as f:
     long_description = f.read()
-
 
 setup(
     name=package_name,
@@ -49,7 +65,8 @@ setup(
         "console_scripts": [
             "vern=vern.parse_all:vern",
         ]
-    },
+    },   
+    cmdclass={'install': CustomInstall},
 
     author=author,
     author_email=author_email,
