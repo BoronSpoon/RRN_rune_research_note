@@ -4,3 +4,4 @@ matplotlib
 pandas
 mat73
 sklearn
+winreg
