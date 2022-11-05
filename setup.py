@@ -4,7 +4,9 @@ from setuptools import setup
 from codecs import open
 from os import path
 import re
-from setuptools.command.install import install                                      
+from setuptools.command.install import install         
+import winreg
+from shutil import which                             
 
 package_name = "vern"
 
@@ -44,8 +46,6 @@ assert license
 assert author
 assert author_email
 assert url
-import winreg
-from shutil import which
 
 with open('README.rst', encoding='utf-8') as f:
     long_description = f.read()
