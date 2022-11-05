@@ -4,8 +4,7 @@ from setuptools import setup
 from codecs import open
 from os import path
 import re
-from setuptools.command.install import install         
-import winreg
+from setuptools.command.install import install
 from shutil import which                             
 
 package_name = "vern"
@@ -20,7 +19,8 @@ def _test_requirements():
     return [name.rstrip() for name in open(path.join(root_dir, 'requirements.txt')).readlines()]
 
 class CustomInstall(install):                                                       
-    def run(self):       
+    def run(self):                
+        import winreg
         for REG_PATH, CLASS, value in [
             [r"Software\Classes\*\shell\vern", winreg.REG_SZ, "process in VERN"],
             [r"Software\Classes\*\shell\vern\command", winreg.REG_EXPAND_SZ, f"\"{which('vern')}\" \"%1\""],
