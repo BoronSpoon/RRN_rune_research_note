@@ -5,7 +5,8 @@ from codecs import open
 from os import path
 import re
 from setuptools.command.install import install
-from shutil import which                             
+from shutil import which
+import platform                          
 
 package_name = "vern"
 
@@ -18,20 +19,23 @@ def _requirements():
 def _test_requirements():
     return [name.rstrip() for name in open(path.join(root_dir, 'requirements.txt')).readlines()]
 
-class CustomInstall(install):                                                       
-    def run(self):                
-        import winreg
-        for REG_PATH, CLASS, value in [
-            [r"Software\Classes\*\shell\vern", winreg.REG_SZ, "process in VERN"],
-            [r"Software\Classes\*\shell\vern\command", winreg.REG_EXPAND_SZ, f"\"{which('vern')}\" \"%1\""],
-        ]:
-            try:
-                winreg.CreateKey(winreg.HKEY_CURRENT_USER, REG_PATH)
-                registry_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, REG_PATH, 0, winreg.KEY_WRITE)
-                winreg.SetValueEx(registry_key, "", 0, CLASS, value)
-                winreg.CloseKey(registry_key)
-            except WindowsError:
-                pass
+class PostInstallCommand(install):
+    """Post-installation for installation mode."""
+    def run(self):
+        install.run(self)
+        if platform.system() == "Windows":
+            import winreg
+            for REG_PATH, CLASS, value in [
+                [r"Software\Classes\*\shell\vern", winreg.REG_SZ, "process in VERN"],
+                [r"Software\Classes\*\shell\vern\command", winreg.REG_EXPAND_SZ, f"\"{which('vern')}\" \"%1\""],
+            ]:
+                try:
+                    winreg.CreateKey(winreg.HKEY_CURRENT_USER, REG_PATH)
+                    registry_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, REG_PATH, 0, winreg.KEY_WRITE)
+                    winreg.SetValueEx(registry_key, "", 0, CLASS, value)
+                    winreg.CloseKey(registry_key)
+                except WindowsError:
+                    pass
 
 with open(path.join(root_dir, package_name, '__init__.py')) as f:
     init_text = f.read()
@@ -66,7 +70,7 @@ setup(
             "vern=vern.parse_all:vern",
         ]
     },   
-    cmdclass={'install': CustomInstall},
+    cmdclass={'install': PostInstallCommand},
 
     author=author,
     author_email=author_email,
