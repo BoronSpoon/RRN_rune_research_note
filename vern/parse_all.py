@@ -26,6 +26,8 @@ def read_files(**kwargs):
         parse_profilometer(**kwargs, interactive=True)
     elif ".txt" in kwargs["input_filename"] or ".TXT" in kwargs["input_filename"]: # profilometer
         parse_profilometer(**kwargs)
+    elif "_i.Dat" in kwargs["input_filename"]: # VSM interactive
+        parse_vsm(**kwargs, interactive=True)
     elif ".Dat" in kwargs["input_filename"]: # VSM
         parse_vsm(**kwargs)
     #elif ".pptx" in filename or ".PPTX" in filename: # pptx
