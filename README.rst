@@ -2,44 +2,12 @@ VERN: Very Easy Research Note
 
 how to use
 ##########
-* create the following files at (your user's) Desktop
-* execute vern_registry.bat
-* USAGE: pick either of these two
-    * (recommended): right click on to-be processed file and select "process in VERN"
-    * drag and drop to-be processed files on the run_vern.bat
-
-run_vern.bat
-============
-
-.. code-block:: bat
-
-    cd %~dp0
-    :loop
-    if not "%~nx1"=="" (
-    python run_vern.py %~f1 & shift & goto loop
-    )
-    pause
-
-run_vern.py
-===========
-
-.. code-block:: python
-
-    from vern import *
-    import argparse
-    parser = argparse.ArgumentParser()
-    parser.add_argument("path")
-    args = parser.parse_args()
-    Vern(args.path)
-
-vern_registry.bat
-=================
-
-.. code-block:: bat
-
-    reg add HKEY_CURRENT_USER\Software\Classes\*\shell\vern /t REG_SZ /d process" "in" "VERN
-    reg add HKEY_CURRENT_USER\Software\Classes\*\shell\vern\command /t REG_EXPAND_SZ /d \^"%USERPROFILE%\Desktop\run_vern.bat\^"" "\^"%%1\^"
-    pause
+* only works on Windows
+    * because it uses registry to make this work in the context menu (menu that appears on right click)
+    * to add support for OSX and Linux, you can do an `pull request`.
+* right click on file and select "process in VERN".
+    * a "report" folder should appear on the same folder.
+    * reports should be generated in the folder.
 
 contribute
 ##########
@@ -73,7 +41,9 @@ tabular
 
 VSM
 ===
-* in progress
+* `*.Dat` file will be regarded as a profilometer file
+* modify filename to `*_i.Dat` to enable interactive mode
+    * interactive mode can crop part of the profile and apply it to normal plot and histogram
 
 oscilloscope
 ============
