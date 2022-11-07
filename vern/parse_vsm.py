@@ -10,10 +10,9 @@ def read_files(input_path, csv_path, plot_path, hist_path, interactive=False):
         
     df = pd_read_csv(
         filename=input_path, encoding="cp932", sep=",", header_count=28, 
-        names_old=["magnetic field (Oe)", r"$magnetization (erg/cm^{3})$"], names_new=["magnetic field (Oe)", r"magnetization (erg/cm^{3})"], unit_conversion_coefficients=[1, 1]
+        names_old=["magnetic field (Oe)", r"magnetization ($erg/cm^{3}$)"], names_new=["magnetic field (Oe)", r"magnetization ($erg/cm^{3}$)"], unit_conversion_coefficients=[1, 1]
     )
     df.to_csv(csv_path, index=False)
-    df = remove_outlier(df)
     p = Plot(df, interactive)
     p.plot(plot_path)
     p.hist(hist_path)
