@@ -4,7 +4,7 @@ import pandas as pd
 from .misc import *
 __all__ = ['parse_oscilloscope_electrical']
 
-def read_files(input_path, output_path):
+def read_files(input_path, output_path, plot_path, hist_path, interactive=False):
     with open(input_path, "r") as f:
         lines = f.readlines()
 
@@ -14,7 +14,9 @@ def read_files(input_path, output_path):
         use_index=True, name_index="time (ns)", index_coefficient=4E-013*1e9
     )
     df.to_csv(output_path, index=False)
-    plot(df)
+    p = Plot(df, interactive=interactive)
+    p.plot(plot_path)
+    p.hist(hist_path)
 
 def parse_oscilloscope_electrical(**kwargs):
-    read_files(kwargs["input_path"], kwargs["output_path"])
+    read_files(kwargs["input_path"], kwargs["output_path"], kwargs["plot_path"], kwargs["hist_path"])
