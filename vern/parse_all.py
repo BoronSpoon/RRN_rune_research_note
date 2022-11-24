@@ -18,6 +18,8 @@ def read_files(**kwargs):
 
     if ".mat" in kwargs["input_filename"] or "_m.MAT" in kwargs["input_filename"]: # convert .mat to tabular data
         parse_mat(**kwargs)
+        if "DL9000" in lines[1]: # oscilloscope_electrical
+            parse_oscilloscope(**kwargs)
     elif "_m1.txt" in kwargs["input_filename"] or "_m1.TXT" in kwargs["input_filename"]: # manual plot with tabular data and linear regression
         parse_tabular(**kwargs, linear_regression=True)
     elif "_m.txt" in kwargs["input_filename"] or "_m.TXT" in kwargs["input_filename"]: # manual plot with tabular data
@@ -34,8 +36,6 @@ def read_files(**kwargs):
     #    parse_pptx.main(**kwargs)
     elif ".dxf" in kwargs["input_filename"] or ".DXF" in kwargs["input_filename"]: # autocad DXF
         parse_autocad(**kwargs)
-    elif "DL9000" in lines[1]: # oscilloscope_electrical
-        parse_oscilloscope(**kwargs)
 
 def vern(argv=sys.argv):
     input_path = argv[1]
