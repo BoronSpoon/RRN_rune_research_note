@@ -11,6 +11,7 @@ def read_files(input_path, txt_path):
         mat = mat73.loadmat(input_path)
     except:
         mat = scipy.io.loadmat(input_path)
+    print(mat)
     df = pd.DataFrame.from_dict(mat)
     df.to_csv(txt_path, index=False)
 
