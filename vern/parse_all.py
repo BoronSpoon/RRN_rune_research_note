@@ -1,7 +1,10 @@
 # profilometer
 import os, sys
+import mat73
+import scipy.io
 from .parse_autocad import *
-from .parse_oscilloscope import *
+from .parse_oscilloscope_electrical import *
+from .parse_oscilloscope_optical import *
 from .parse_profilometer import *
 from .parse_tabular import *
 from .parse_vsm import *
@@ -17,9 +20,11 @@ def read_files(**kwargs):
             lines = None
 
     if ".mat" in kwargs["input_filename"] or "_m.MAT" in kwargs["input_filename"]: # convert .mat to tabular data
-        parse_mat(**kwargs)
-        if "DL9000" in lines[1]: # oscilloscope_electrical
-            parse_oscilloscope(**kwargs)
+        keys = get_keys_mat(kwargs["input_filename"])
+        if "ref" in keys: # oscilloscope_optical
+            parse_oscilloscope_optical(**kwargs)
+        else:
+            parse_mat(**kwargs)
     elif "_m1.txt" in kwargs["input_filename"] or "_m1.TXT" in kwargs["input_filename"]: # manual plot with tabular data and linear regression
         parse_tabular(**kwargs, linear_regression=True)
     elif "_m.txt" in kwargs["input_filename"] or "_m.TXT" in kwargs["input_filename"]: # manual plot with tabular data
@@ -36,6 +41,15 @@ def read_files(**kwargs):
     #    parse_pptx.main(**kwargs)
     elif ".dxf" in kwargs["input_filename"] or ".DXF" in kwargs["input_filename"]: # autocad DXF
         parse_autocad(**kwargs)
+    elif "DL9000" in lines[1]: 
+        parse_oscilloscope_electrical(**kwargs)
+
+def get_keys_mat(input_path):
+    try:
+        mat = mat73.loadmat(input_path)
+    except:
+        mat = scipy.io.loadmat(input_path)
+    return mat.keys()
 
 def vern(argv=sys.argv):
     input_path = argv[1]

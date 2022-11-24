@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 from .misc import *
-__all__ = ['parse_oscilloscope']
+__all__ = ['parse_oscilloscope_electrical']
 
 def read_files(input_path, output_path):
     with open(input_path, "r") as f:
