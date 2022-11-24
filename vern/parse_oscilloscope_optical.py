@@ -18,5 +18,5 @@ def read_files(input_path, txt_path):
     df = pd.DataFrame.from_dict(data)
     df.to_csv(txt_path, index=False)
 
-def parse_mat(**kwargs):
+def parse_oscilloscope_optical(**kwargs):
     read_files(kwargs["input_path"], kwargs["txt_path"])

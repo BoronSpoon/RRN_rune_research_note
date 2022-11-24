@@ -16,5 +16,5 @@ def read_files(input_path, output_path):
     df.to_csv(output_path, index=False)
     plot(df)
 
-def parse_oscilloscope(**kwargs):
+def parse_oscilloscope_electrical(**kwargs):
     read_files(kwargs["input_path"], kwargs["output_path"])
