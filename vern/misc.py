@@ -72,9 +72,9 @@ class Plot():
             self.ax.set(ylabel=keys[1])
         else:
             if self.linear_regression:
-                self.df.scatter(x=keys[0], y=keys[1], ax=self.ax, fit_reg=True)
+                self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True)
             else:
-                self.df.plot(kind="line", x=keys[0], y=keys[1], ax=self.ax)
+                self.df.plot(kind="line", x=keys[0], ax=self.ax)
         plt.savefig(plot_path, bbox_inches="tight")
  
     def on_xlims_change(self, event_ax):
