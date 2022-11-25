@@ -6,7 +6,7 @@ __all__ = ['parse_tabular']
 
 def read_files(input_path, csv_path, plot_path, interactive=False, linear_regression=False):
     df = pd_read_csv( 
-        filename=input_path, encoding="utf-8", sep=", ", header_count=0,
+        filename=input_path, encoding="utf-8", sep=",", header_count=0,
         rename_columns=False,
     )
     df.to_csv(csv_path, index=False)
