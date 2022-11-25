@@ -75,7 +75,6 @@ class Plot():
                 self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True)
             else:
                 self.df.plot(kind="line", x=keys[0], ax=self.ax)
-            print(keys[0], keys[0].split("\t"))
             self.ax.set(xlabel=keys[0].split("\t")[0])
             self.ax.set(ylabel=keys[0].split("\t")[1])
         plt.savefig(plot_path, bbox_inches="tight")
