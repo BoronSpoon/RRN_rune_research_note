@@ -4,7 +4,8 @@ import mat73
 import scipy.io
 from .parse_autocad import *
 from .parse_oscilloscope_electrical import *
-from .parse_oscilloscope_optical import *
+from .parse_oscilloscope_optical_right import *
+from .parse_oscilloscope_optical_left import *
 from .parse_profilometer import *
 from .parse_tabular import *
 from .parse_vsm import *
@@ -22,7 +23,9 @@ def read_files(**kwargs):
     if ".mat" in kwargs["input_filename"] or "_m.MAT" in kwargs["input_filename"]: # convert .mat to tabular data
         keys = get_keys_mat(kwargs["input_filename"])
         if "ref" in keys: # oscilloscope_optical
-            parse_oscilloscope_optical(**kwargs)
+            parse_oscilloscope_optical_right(**kwargs)
+        elif "output" in keys: # oscilloscope_optical
+            parse_oscilloscope_optical_left(**kwargs)
         else:
             parse_mat(**kwargs)
     elif "_m1.txt" in kwargs["input_filename"] or "_m1.TXT" in kwargs["input_filename"]: # manual plot with tabular data and linear regression

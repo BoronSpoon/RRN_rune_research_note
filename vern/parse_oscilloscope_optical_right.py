@@ -21,5 +21,5 @@ def read_files(input_path, txt_path, plot_path, hist_path, interactive=False):
     p.plot(plot_path)
     p.hist(hist_path)
 
-def parse_oscilloscope_optical(**kwargs):
+def parse_oscilloscope_optical_right(**kwargs):
     read_files(kwargs["input_path"], kwargs["txt_path"], kwargs["plot_path"], kwargs["hist_path"])
