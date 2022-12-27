@@ -4,7 +4,7 @@ import pandas as pd
 from .misc import *
 import mat73
 import scipy.io
-__all__ = ['parse_oscilloscope_optical']
+__all__ = ['parse_oscilloscope_optical_left']
 
 def read_files(input_path, txt_path, plot_path, hist_path, interactive=False):
     try:
