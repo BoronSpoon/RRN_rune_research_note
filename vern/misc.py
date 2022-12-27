@@ -96,7 +96,13 @@ class Plot():
 
     def crop_data(self):
         keys = self.df.keys()
-        self.df = self.df[(self.df[keys[0]] > self.xlim[0]) & (self.df[keys[0]] < self.xlim[1]) & (self.df[keys[1]] > self.ylim[0]) & (self.df[keys[1]] < self.ylim[1])]
+        mask = [i for i in range(len(self.df[keys[0]]))]
+        for i in range(len(keys)):
+            if i == 0:
+                mask = mask & (self.df[keys[i]] > self.xlim[0]) & (self.df[keys[i]] < self.xlim[1])
+            else:
+                mask = mask & (self.df[keys[i]] > self.ylim[0]) & (self.df[keys[i]] < self.ylim[1])
+        self.df = self.df[mask]
 
     def plot(self, plot_path):
         self.plot_(plot_path)
