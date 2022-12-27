@@ -32,6 +32,8 @@ def read_files(**kwargs):
         parse_tabular(**kwargs, linear_regression=True)
     elif "_m.txt" in kwargs["input_filename"] or "_m.TXT" in kwargs["input_filename"]: # manual plot with tabular data
         parse_tabular(**kwargs)
+    elif "_mi.txt" in kwargs["input_filename"] or "_mi.TXT" in kwargs["input_filename"]: # manual plot with tabular data
+        parse_tabular(**kwargs, interactive=True)
     elif "_i.txt" in kwargs["input_filename"] or "_i.TXT" in kwargs["input_filename"]: # profilometer
         parse_profilometer(**kwargs, interactive=True)
     elif ".txt" in kwargs["input_filename"] or ".TXT" in kwargs["input_filename"]: # profilometer
