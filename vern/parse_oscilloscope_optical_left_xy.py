@@ -12,8 +12,8 @@ def read_files(input_path, txt_path, plot_path, hist_path, interactive=False):
     except:
         mat = scipy.io.loadmat(input_path)
     data = {
-        "Wavelength (µm)": mat["x"][0,:],
-        "Transmittance (dB)": mat["y"][0,:],
+        "Time (ns)": mat["x"][0,:]*1e9,
+        "Voltage (mV)": mat["y"][0,:]*1e3,
     }
     df = pd.DataFrame.from_dict(data)
     df.to_csv(txt_path, index=False)
