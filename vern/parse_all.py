@@ -6,6 +6,7 @@ from .parse_autocad import *
 from .parse_oscilloscope_electrical import *
 from .parse_oscilloscope_optical_right import *
 from .parse_oscilloscope_optical_left import *
+from .parse_oscilloscope_optical_left_xy import *
 from .parse_profilometer import *
 from .parse_tabular import *
 from .parse_vsm import *
@@ -26,6 +27,8 @@ def read_files(**kwargs):
             parse_oscilloscope_optical_right(**kwargs)
         elif "output" in keys: # oscilloscope_optical
             parse_oscilloscope_optical_left(**kwargs)
+        elif "x" in keys and "y" in keys: # oscilloscope_optical with x y key pair
+            parse_oscilloscope_optical_left_xy(**kwargs)
         else:
             parse_mat(**kwargs)
     elif "_m1.txt" in kwargs["input_filename"] or "_m1.TXT" in kwargs["input_filename"]: # manual plot with tabular data and linear regression
