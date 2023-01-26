@@ -72,8 +72,8 @@ def vern(argv=sys.argv):
 
     smooth_txt_directory = input_directory
     smooth_txt_filename_wo_ext = input_filename_wo_ext + "_smooth"
-    smooth_txt_filename = txt_filename_wo_ext + ".txt"
-    smooth_txt_path = os.path.join(txt_directory, txt_filename)
+    smooth_txt_filename = smooth_txt_filename_wo_ext + ".txt"
+    smooth_txt_path = os.path.join(smooth_txt_directory, smooth_txt_filename)
 
     csv_directory = os.path.join(input_directory, "report")
     csv_filename_wo_ext = input_filename_wo_ext
