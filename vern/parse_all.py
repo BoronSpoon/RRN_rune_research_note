@@ -7,7 +7,6 @@ from .parse_oscilloscope_electrical import *
 from .parse_oscilloscope_optical_right import *
 from .parse_oscilloscope_optical_left import *
 from .parse_oscilloscope_optical_left_xy import *
-from .parse_oscilloscope_optical_left_xy_smooth import *
 from .parse_profilometer import *
 from .parse_tabular import *
 from .parse_vsm import *
@@ -29,10 +28,7 @@ def read_files(**kwargs):
         elif "output" in keys: # oscilloscope_optical
             parse_oscilloscope_optical_left(**kwargs)
         elif "x" in keys and "y" in keys: # oscilloscope_optical with x y key pair
-            if "_s.mat" in kwargs["input_filename"] or "_s.MAT" in kwargs["input_filename"]:
-                parse_oscilloscope_optical_left_xy_smooth(**kwargs)
-            else:
-                parse_oscilloscope_optical_left_xy(**kwargs)
+            parse_oscilloscope_optical_left_xy(**kwargs)
         else:
             parse_mat(**kwargs)
     elif "_m1.txt" in kwargs["input_filename"] or "_m1.TXT" in kwargs["input_filename"]: # manual plot with tabular data and linear regression
@@ -89,6 +85,16 @@ def vern(argv=sys.argv):
     hist_filename = hist_filename_wo_ext + ".png"
     hist_path = os.path.join(hist_directory, hist_filename)
 
+    smooth_plot_directory = os.path.join(input_directory, "report")
+    smooth_plot_filename_wo_ext = input_filename_wo_ext
+    smooth_plot_filename = plot_filename_wo_ext + "_smooth.png"
+    smooth_plot_path = os.path.join(plot_directory, plot_filename)
+
+    smooth_hist_directory = os.path.join(input_directory, "report")
+    smooth_hist_filename_wo_ext = input_filename_wo_ext + "_smooth_hist"
+    smooth_hist_filename = hist_filename_wo_ext + ".png"
+    smooth_hist_path = os.path.join(hist_directory, hist_filename)
+
     svg_directory = os.path.join(input_directory, "report")
     svg_filename_wo_ext = input_filename_wo_ext
     svg_filename = svg_filename_wo_ext + ".svg"
@@ -123,6 +129,16 @@ def vern(argv=sys.argv):
         "hist_directory":       hist_directory,
         "hist_filename":        hist_filename,
         "hist_filename_wo_ext": hist_filename_wo_ext,
+
+        "smooth_plot_path":            smooth_plot_path,
+        "smooth_plot_directory":       smooth_plot_directory,
+        "smooth_plot_filename":        smooth_plot_filename,
+        "smooth_plot_filename_wo_ext": smooth_plot_filename_wo_ext,
+
+        "smooth_hist_path":            smooth_hist_path,
+        "smooth_hist_directory":       smooth_hist_directory,
+        "smooth_hist_filename":        smooth_hist_filename,
+        "smooth_hist_filename_wo_ext": smooth_hist_filename_wo_ext,
 
         "svg_path":            svg_path,
         "svg_directory":       svg_directory,
