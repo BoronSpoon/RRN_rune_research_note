@@ -28,7 +28,7 @@ def read_files(input_path, txt_path, plot_path, hist_path, interactive=False):
 def smooth(x, y):
     # band pass filter from 100 MHz to 10 GHz
     freq = 1/(x[1] - x[0])
-    sos = signal.butter(10, [100e6, 10e9], 'hp', fs=freq, output='sos')
+    sos = signal.butter(10, [100e6, 10e9], 'bp', fs=freq, output='sos')
     filtered = signal.sosfilt(sos, y)
     return filtered
 
