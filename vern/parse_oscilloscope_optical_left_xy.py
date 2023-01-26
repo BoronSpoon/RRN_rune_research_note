@@ -6,7 +6,7 @@ import mat73
 import scipy.io
 __all__ = ['parse_oscilloscope_optical_left_xy']
 
-def read_files(input_path, txt_path, plot_path, hist_path, smooth_plot_path, interactive=False):
+def read_files(input_path, txt_path, smooth_txt_path, plot_path, hist_path, smooth_plot_path, interactive=False):
     try:
         mat = mat73.loadmat(input_path)
     except:
@@ -22,8 +22,9 @@ def read_files(input_path, txt_path, plot_path, hist_path, smooth_plot_path, int
     p.hist(hist_path)
     smooth_df = df.copy()
     smooth_df["Voltage (mV)"] = smooth_df["Voltage (mV)"].rolling(100).mean()
+    smooth_df.to_csv(smooth_txt_path, index=False)
     p = Plot(smooth_df, interactive=interactive)
     p.plot(smooth_plot_path)
 
 def parse_oscilloscope_optical_left_xy(**kwargs):
-    read_files(kwargs["input_path"], kwargs["txt_path"], kwargs["plot_path"], kwargs["hist_path"], kwargs["smooth_plot_path"])
+    read_files(kwargs["input_path"], kwargs["txt_path"], kwargs["smooth_txt_path"], kwargs["plot_path"], kwargs["hist_path"], kwargs["smooth_plot_path"])
