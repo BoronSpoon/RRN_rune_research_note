@@ -86,14 +86,9 @@ def vern(argv=sys.argv):
     hist_path = os.path.join(hist_directory, hist_filename)
 
     smooth_plot_directory = os.path.join(input_directory, "report")
-    smooth_plot_filename_wo_ext = input_filename_wo_ext
-    smooth_plot_filename = plot_filename_wo_ext + "_smooth.png"
-    smooth_plot_path = os.path.join(plot_directory, plot_filename)
-
-    smooth_hist_directory = os.path.join(input_directory, "report")
-    smooth_hist_filename_wo_ext = input_filename_wo_ext + "_smooth_hist"
-    smooth_hist_filename = hist_filename_wo_ext + ".png"
-    smooth_hist_path = os.path.join(hist_directory, hist_filename)
+    smooth_plot_filename_wo_ext = input_filename_wo_ext + "_smooth"
+    smooth_plot_filename = smooth_plot_filename_wo_ext + ".png"
+    smooth_plot_path = os.path.join(smooth_plot_directory, smooth_plot_filename)
 
     svg_directory = os.path.join(input_directory, "report")
     svg_filename_wo_ext = input_filename_wo_ext
@@ -134,11 +129,6 @@ def vern(argv=sys.argv):
         "smooth_plot_directory":       smooth_plot_directory,
         "smooth_plot_filename":        smooth_plot_filename,
         "smooth_plot_filename_wo_ext": smooth_plot_filename_wo_ext,
-
-        "smooth_hist_path":            smooth_hist_path,
-        "smooth_hist_directory":       smooth_hist_directory,
-        "smooth_hist_filename":        smooth_hist_filename,
-        "smooth_hist_filename_wo_ext": smooth_hist_filename_wo_ext,
 
         "svg_path":            svg_path,
         "svg_directory":       svg_directory,
