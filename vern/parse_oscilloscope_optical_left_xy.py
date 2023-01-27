@@ -21,7 +21,7 @@ def read_files(input_path, txt_path, smooth_txt_path, plot_path, hist_path, smoo
     p.plot(plot_path)
     p.hist(hist_path)
     smooth_df = df.copy()
-    smooth_df["Voltage (mV)"] = smooth_df["Voltage (mV)"].rolling(100).mean()
+    smooth_df["Voltage (mV)"] = smooth_df["Voltage (mV)"].rolling(50).mean()
     smooth_df.to_csv(smooth_txt_path, index=False)
     p = Plot(smooth_df, interactive=interactive)
     p.plot(smooth_plot_path)
