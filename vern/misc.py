@@ -51,10 +51,16 @@ def remove_outlier(df):
     return df
 
 class Plot():
-    def __init__(self, df, interactive=False, linear_regression=False):
+    def __init__(self, df, interactive=False, linear_regression=False, wide=False):
         self.df = df
         self.interactive = interactive
         self.linear_regression = linear_regression
+        self.wide = wide
+        if self.wide:
+            figsize = (8,4)
+        else:
+            figsize = (8,6)
+        plt.figure(figsize = figsize)
 
     def plot_(self, plot_path):
         set_rcparams()
