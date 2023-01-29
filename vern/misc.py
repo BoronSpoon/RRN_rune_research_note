@@ -61,6 +61,7 @@ class Plot():
         else:
             self.figsize = plt.rcParamsDefault["figure.figsize"]
         plt.rcParams["figure.figsize"]
+        plt.clf()
         plt.figure(figsize=self.figsize)
 
     def plot_(self, plot_path):
@@ -126,7 +127,6 @@ class Plot():
 
     def hist(self, hist_path):
         set_rcparams()
-        plt.gcf().set_size_inches(*self.figsize)
         self.ax = plt.gca()
         keys = self.df.keys()
         if len(keys) == 2: # dont need legend for two axis
