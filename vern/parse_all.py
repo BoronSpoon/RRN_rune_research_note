@@ -20,7 +20,7 @@ def read_files(**kwargs):
             lines = f.readlines()
         except:
             lines = None
-    if "_w." in kwargs["input_filename"]:
+    if "_w_" in kwargs["input_filename"] or "_w." in kwargs["input_filename"]:
         kwargs = dict(kwargs, wide=True)
     if ".mat" in kwargs["input_filename"] or "_.MAT" in kwargs["input_filename"]: # convert .mat to tabular data
         keys = get_keys_mat(kwargs["input_filename"])
