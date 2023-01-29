@@ -57,6 +57,7 @@ class Plot():
         self.linear_regression = linear_regression
         self.wide = wide
         if self.wide:
+            print(self.wide)
             self.figsize = (8,4)
         else:
             self.figsize = plt.rcParamsDefault["figure.figsize"]
