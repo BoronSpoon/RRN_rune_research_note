@@ -60,6 +60,7 @@ class Plot():
             self.figsize = (8,4)
         else:
             self.figsize = plt.rcParamsDefault["figure.figsize"]
+        plt.figure(figsize=self.figsize)
 
     def plot_(self, plot_path):
         set_rcparams()
