@@ -60,7 +60,7 @@ class Plot():
             self.figsize = (8,4)
         else:
             self.figsize = plt.rcParamsDefault["figure.figsize"]
-        plt.rcParams["figure.figsize"]
+        plt.rcParams["figure.figsize"] = self.figsize
         plt.clf()
         plt.figure(figsize=self.figsize)
 
