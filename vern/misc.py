@@ -59,8 +59,8 @@ class Plot():
         if self.wide:
             figsize = (8,4)
         else:
-            figsize = (8,6)
-        plt.figure(figsize = figsize)
+            figsize = plt.rcParamsDefault["figure.figsize"]
+        plt.rcParams["figure.figsize"] = figsize
 
     def plot_(self, plot_path):
         set_rcparams()
