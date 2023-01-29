@@ -57,13 +57,13 @@ class Plot():
         self.linear_regression = linear_regression
         self.wide = wide
         if self.wide:
-            figsize = (8,4)
+            self.figsize = (8,4)
         else:
-            figsize = plt.rcParamsDefault["figure.figsize"]
-        plt.rcParams["figure.figsize"] = figsize
+            self.figsize = plt.rcParamsDefault["figure.figsize"]
 
     def plot_(self, plot_path):
         set_rcparams()
+        plt.gcf().set_size_inches(*self.figsize)
         self.ax = plt.gca()
         keys = self.df.keys()
         xmin, ymax = min(self.df[keys[0]]), max(self.df[keys[1]])
@@ -125,6 +125,7 @@ class Plot():
 
     def hist(self, hist_path):
         set_rcparams()
+        plt.gcf().set_size_inches(*self.figsize)
         self.ax = plt.gca()
         keys = self.df.keys()
         if len(keys) == 2: # dont need legend for two axis
