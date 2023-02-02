@@ -12,7 +12,7 @@ def read_files(input_path, txt_path, plot_path, hist_path, interactive=False):
     except:
         mat = scipy.io.loadmat(input_path)
     data = {
-        "Wavelength (µm)": mat["ref"][:,0],
+        "Wavelength (nm)": mat["ref"][:,0],
         "Transmittance (dB)": mat["ref"][:,1],
     }
     df = pd.DataFrame.from_dict(data)
