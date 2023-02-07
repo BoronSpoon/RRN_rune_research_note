@@ -83,7 +83,7 @@ class Plot():
             if self.linear_regression:
                 self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True, subplots=self.subplots)
             else:
-                self.df.plot(kind="line", x=keys[0], ax=self.ax)
+                self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=self.subplots)
             self.ax.set(xlabel=keys[0].split("\t")[0])
             self.ax.set(ylabel=keys[0].split("\t")[1])
         plt.savefig(plot_path, bbox_inches="tight")
