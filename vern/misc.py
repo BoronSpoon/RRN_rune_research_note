@@ -81,7 +81,7 @@ class Plot():
             self.ax.set(ylabel=keys[1])
         else:
             subplot_y = int(len(keys)**0.5)
-            subplot_x = np.ceil(len(keys)/subplot_y)
+            subplot_x = int(np.ceil(len(keys)/subplot_y))
             if self.linear_regression:
                 self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True, subplots=self.subplots, layout=(subplot_x,subplot_y))
             else:
