@@ -63,10 +63,10 @@ class Plot():
         else:
             self.figsize = plt.rcParamsDefault["figure.figsize"]
         if self.subplots:
-            subplot_y = int(len(keys)**0.5)
-            subplot_x = int(np.ceil(len(keys)/subplot_y))
-            self.figsize[0] = int(self.figsize[0] * subplot_x)
-            self.figsize[1] = int(self.figsize[1] * subplot_y)
+            self.subplot_y = int(len(keys)**0.5)
+            self.subplot_x = int(np.ceil(len(keys)/self.subplot_y))
+            self.figsize[0] = int(self.figsize[0] * self.subplot_x)
+            self.figsize[1] = int(self.figsize[1] * self.subplot_y)
         plt.rcParams["figure.figsize"] = self.figsize
         plt.clf()
         plt.figure(figsize=self.figsize)
@@ -87,9 +87,9 @@ class Plot():
             self.ax.set(ylabel=keys[1])
         else:
             if self.linear_regression:
-                self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True, subplots=self.subplots, layout=(subplot_x,subplot_y))
+                self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y))
             else:
-                self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(subplot_x,subplot_y))
+                self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y))
             self.ax.set(xlabel=keys[0].split("\t")[0])
             self.ax.set(ylabel=keys[0].split("\t")[1])
         plt.savefig(plot_path, bbox_inches="tight")
