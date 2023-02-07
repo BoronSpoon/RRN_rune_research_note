@@ -80,10 +80,12 @@ class Plot():
                 self.df.plot(kind="line", x=keys[0], y=keys[1], legend=None, ax=self.ax)
             self.ax.set(ylabel=keys[1])
         else:
+            subplot_y = int(len(keys)**0.5)
+            subplot_x = np.ceil(len(keys)/subplot_y)
             if self.linear_regression:
-                self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True, subplots=self.subplots)
+                self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True, subplots=self.subplots, layout=(subplot_x,subplot_y))
             else:
-                self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=self.subplots)
+                self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(subplot_x,subplot_y))
             self.ax.set(xlabel=keys[0].split("\t")[0])
             self.ax.set(ylabel=keys[0].split("\t")[1])
         plt.savefig(plot_path, bbox_inches="tight")
