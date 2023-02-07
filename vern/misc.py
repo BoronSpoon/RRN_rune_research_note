@@ -91,9 +91,9 @@ class Plot():
             self.ax.set(ylabel=keys[1])
         else:
             if self.linear_regression:
-                self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=True, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1])
+                self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1])
             else:
-                self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=True, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1])
+                self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1])
             self.ax.set(xlabel=keys[0].split("\t")[0])
             self.ax.set(ylabel=keys[0].split("\t")[1])
             plt.tight_layout()
