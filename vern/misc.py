@@ -63,7 +63,7 @@ class Plot():
         else:
             self.figsize = plt.rcParamsDefault["figure.figsize"]
         if self.subplots:
-            self.figsize = [8,6]
+            self.figsize = [6,3]
             self.subplot_x = int(len(keys)**0.5)
             self.subplot_y = int(np.ceil(len(keys)/self.subplot_x))
             self.figsize[0] = int(self.figsize[0] * (self.subplot_x))
