@@ -59,11 +59,11 @@ class Plot():
         self.wide = wide
         self.subplots = subplots
         if self.wide:
-            self.figsize = (8,3)
+            self.figsize = [8,3]
         else:
             self.figsize = plt.rcParamsDefault["figure.figsize"]
         if self.subplots:
-            self.figsize = (8,6)
+            self.figsize = [8,6]
             self.subplot_x = int(len(keys)**0.5)
             self.subplot_y = int(np.ceil(len(keys)/self.subplot_x))
             self.figsize[0] = int(self.figsize[0] * (self.subplot_x))
