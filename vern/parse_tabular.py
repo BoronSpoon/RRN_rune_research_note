@@ -4,13 +4,13 @@ import pandas as pd
 from .misc import *
 __all__ = ['parse_tabular']
 
-def read_files(input_path, csv_path, plot_path, interactive=False, linear_regression=False, wide=False):
+def read_files(input_path, csv_path, plot_path, interactive=False, linear_regression=False, wide=False, subplots=False):
     df = pd_read_csv( 
         filename=input_path, encoding="utf-8", sep=",", header_count=0,
         rename_columns=False,
     )
     df.to_csv(csv_path, index=False)
-    p = Plot(df, interactive=interactive, linear_regression=linear_regression, wide=wide)
+    p = Plot(df, interactive=interactive, linear_regression=linear_regression, wide=wide, subplots=subplots)
     p.plot(plot_path)
 
 def parse_tabular(**kwargs):
