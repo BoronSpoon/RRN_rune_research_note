@@ -2,7 +2,7 @@ import os, glob
 from .parse_all import *
 
 __copyright__    = 'Copyright (C) 2022 BoronSpoon'
-__version__      = '1.3.7b'
+__version__      = '1.3.8b'
 __license__      = 'MIT License'
 __author__       = 'boronspoon'
 __author_email__ = 'rayanticlimactic@gmail.com'
