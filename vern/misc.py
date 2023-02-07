@@ -95,6 +95,7 @@ class Plot():
                 self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=True, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1])
             self.ax.set(xlabel=keys[0].split("\t")[0])
             self.ax.set(ylabel=keys[0].split("\t")[1])
+            plt.tight_layout()
         plt.savefig(plot_path, bbox_inches="tight")
  
     def on_xlims_change(self, event_ax):
