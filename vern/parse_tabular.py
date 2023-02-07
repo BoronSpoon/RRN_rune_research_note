@@ -17,4 +17,5 @@ def parse_tabular(**kwargs):
     interactive = kwargs["interactive"] if "interactive" in kwargs.keys() else False
     linear_regression = kwargs["linear_regression"] if "linear_regression" in kwargs.keys() else False
     wide = kwargs["wide"] if "wide" in kwargs.keys() else False
-    read_files(kwargs["input_path"], kwargs["csv_path"], kwargs["plot_path"], interactive=interactive, linear_regression=linear_regression, wide=wide)
+    subplots = kwargs["subplots"] if "subplots" in kwargs.keys() else False
+    read_files(kwargs["input_path"], kwargs["csv_path"], kwargs["plot_path"], interactive=interactive, linear_regression=linear_regression, wide=wide, subplots=subplots)

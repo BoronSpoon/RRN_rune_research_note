@@ -51,11 +51,12 @@ def remove_outlier(df):
     return df
 
 class Plot():
-    def __init__(self, df, interactive=False, linear_regression=False, wide=False):
+    def __init__(self, df, interactive=False, linear_regression=False, wide=False, subplots=False):
         self.df = df
         self.interactive = interactive
         self.linear_regression = linear_regression
         self.wide = wide
+        self.subplots = subplots
         if self.wide:
             self.figsize = (8,3)
         else:
@@ -80,7 +81,7 @@ class Plot():
             self.ax.set(ylabel=keys[1])
         else:
             if self.linear_regression:
-                self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True)
+                self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True, subplots=self.subplots)
             else:
                 self.df.plot(kind="line", x=keys[0], ax=self.ax)
             self.ax.set(xlabel=keys[0].split("\t")[0])
