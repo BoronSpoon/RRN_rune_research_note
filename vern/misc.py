@@ -68,6 +68,7 @@ class Plot():
             self.subplot_y = int(np.ceil((len(keys)-1)/self.subplot_x))
             self.figsize[0] = int(self.figsize[0] * (self.subplot_x))
             self.figsize[1] = int(self.figsize[1] * (self.subplot_y))
+            plt.rcParams["legend.fontsize"] = 15
         else:
             self.subplot_x = 1
             self.subplot_y = 1
