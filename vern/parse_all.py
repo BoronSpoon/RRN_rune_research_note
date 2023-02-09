@@ -24,6 +24,8 @@ def read_files(**kwargs):
         kwargs = dict(kwargs, wide=True)
     if "_s_" in kwargs["input_filename"] or "_s." in kwargs["input_filename"]:
         kwargs = dict(kwargs, subplots=True)
+    if "_r_" in kwargs["input_filename"] or "_r." in kwargs["input_filename"]:
+        kwargs = dict(kwargs, reference=True)
     if ".mat" in kwargs["input_filename"] or "_.MAT" in kwargs["input_filename"]: # convert .mat to tabular data
         keys = get_keys_mat(kwargs["input_filename"])
         if "ref" in keys: # oscilloscope_optical
