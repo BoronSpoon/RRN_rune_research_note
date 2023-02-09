@@ -58,6 +58,7 @@ class Plot():
         self.linear_regression = linear_regression
         self.wide = wide
         self.subplots = subplots
+        self.reference = reference
         if self.wide:
             self.figsize = [8,3]
         else:
