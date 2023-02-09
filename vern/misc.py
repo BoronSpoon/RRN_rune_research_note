@@ -100,7 +100,13 @@ class Plot():
             else:
                 if self.subplots:
                     if self.reference:
-                        self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=[[keys[1], keys[2+i]] if i==0 else [keys[2+i]] for i in range(len(keys)-2)], layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["b"]*(len(keys)-1))
+                        reference_df = pd.DataFrame()
+                        reference_df[keys[0]] = self.df[keys[0]]
+                        for i in range(len(keys)-2):
+                            reference_df[keys[1]+r"\t"*i] = self.df[keys[1]]
+                        for i in range(len(keys)-2):
+                            reference_df[keys[2+i]] = self.df[keys[2+i]]
+                        reference_df.plot(kind="line", x=keys[0], ax=self.ax, subplots=[[keys[1+i], keys[1+(len(keys)-2)+i]] for i in range(len(keys)-2)], layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["orange","b"]*(len(keys)-1))
                     else:
                         self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["b"]*(len(keys)-1))
                 else:
