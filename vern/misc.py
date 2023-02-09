@@ -104,7 +104,7 @@ class Plot():
                         df_reference[keys[0]] = self.df[keys[0]]
                         for i in range(len(keys)-2):
                             df_reference[keys[1]+r"\t"*i] = self.df[keys[1]]
-                        self.df = self.df.drop(keys[1])
+                        self.df = self.df.drop(keys[1], axis="columns")
                         df_reference.plot(kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["b"]*(len(keys)-1))
                     self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["b"]*(len(keys)-1))
                 else:
