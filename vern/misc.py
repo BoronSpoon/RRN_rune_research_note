@@ -100,6 +100,7 @@ class Plot():
             else:
                 if self.subplots:
                     if self.reference:
+                        print("reference mode")
                         self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=[[keys[1], keys[2+i]] for i in range(len(keys)-2)], layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["b"]*(len(keys)-1))
                     else:
                         self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["b"]*(len(keys)-1))
