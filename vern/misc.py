@@ -51,7 +51,7 @@ def remove_outlier(df):
     return df
 
 class Plot():
-    def __init__(self, df, interactive=False, linear_regression=False, wide=False, subplots=False, reference=False):
+    def __init__(self, df, interactive=False, linear_regression=False, wide=False, subplots=False, reference=False, logy=False):
         self.df = df
         keys = self.df.keys()
         self.interactive = interactive
@@ -59,6 +59,7 @@ class Plot():
         self.wide = wide
         self.subplots = subplots
         self.reference = reference
+        self.logy = logy
         if self.wide:
             self.figsize = [8,3]
         else:
@@ -89,7 +90,7 @@ class Plot():
                 self.df.plot(kind="line", x=keys[0], y="fit_y", legend=None, ax=self.ax, style="-")
                 self.ax.text(xmin, ymax, f"{params[0]:.3f}x+{params[1]:.3f}, r2={r2:.3f}", horizontalalignment="left", verticalalignment="top")
             else:
-                self.df.plot(kind="line", x=keys[0], y=keys[1], legend=None, ax=self.ax)
+                self.df.plot(logy=self.logy, kind="line", x=keys[0], y=keys[1], legend=None, ax=self.ax)
             self.ax.set(ylabel=keys[1])
         else:
             if self.linear_regression:
@@ -106,11 +107,11 @@ class Plot():
                             reference_df[keys[1]+"\u200b"*i] = self.df[keys[1]]
                         for i in range(len(keys)-2):
                             reference_df[keys[2+i]] = self.df[keys[2+i]]
-                        reference_df.plot(kind="line", x=keys[0], ax=self.ax, subplots=[[reference_df.keys()[1+i], reference_df.keys()[1+(len(keys)-2)+i]] for i in range(len(keys)-2)], layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["orange"]*(len(keys)-2)+["b"]*(len(keys)-2))
+                        reference_df.plot(logy=self.logy, kind="line", x=keys[0], ax=self.ax, subplots=[[reference_df.keys()[1+i], reference_df.keys()[1+(len(keys)-2)+i]] for i in range(len(keys)-2)], layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["orange"]*(len(keys)-2)+["b"]*(len(keys)-2))
                     else:
-                        self.df.plot(kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["b"]*(len(keys)-1))
+                        self.df.plot(logy=self.logy, kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["b"]*(len(keys)-1))
                 else:
-                    self.df.plot(kind="line", x=keys[0], ax=self.ax)
+                    self.df.plot(logy=self.logy, kind="line", x=keys[0], ax=self.ax)
             self.ax.set(xlabel=keys[0].split("\t")[0])
             self.ax.set(ylabel=keys[0].split("\t")[1])
             plt.tight_layout()

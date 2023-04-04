@@ -22,6 +22,8 @@ def read_files(**kwargs):
             lines = None
     if "_w_" in kwargs["input_filename"] or "_w." in kwargs["input_filename"]:
         kwargs = dict(kwargs, wide=True)
+    if "_ly_" in kwargs["input_filename"] or "_ly." in kwargs["input_filename"]:
+        kwargs = dict(kwargs, logy=True)
     if "_s_" in kwargs["input_filename"] or "_s." in kwargs["input_filename"]:
         kwargs = dict(kwargs, subplots=True)
     if "_r_" in kwargs["input_filename"] or "_r." in kwargs["input_filename"]:
@@ -38,6 +40,8 @@ def read_files(**kwargs):
             parse_mat(**kwargs)
     elif "_m1.txt" in kwargs["input_filename"] or "_m1.TXT" in kwargs["input_filename"]: # manual plot with tabular data and linear regression
         parse_tabular(**kwargs, linear_regression=True)
+    elif "_c.txt" in kwargs["input_filename"] or "_c.TXT" in kwargs["input_filename"]: # manual plot from comsol (remove headers and comment)
+        parse_tabular(**kwargs, remove_header=True, remove_comment=True)
     elif "_m.txt" in kwargs["input_filename"] or "_m.TXT" in kwargs["input_filename"]: # manual plot with tabular data
         parse_tabular(**kwargs)
     elif "_mi.txt" in kwargs["input_filename"] or "_mi.TXT" in kwargs["input_filename"]: # manual plot with tabular data
