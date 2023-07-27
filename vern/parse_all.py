@@ -40,6 +40,8 @@ def read_files(**kwargs):
             parse_mat(**kwargs)
     elif "_m1.txt" in kwargs["input_filename"] or "_m1.TXT" in kwargs["input_filename"]: # manual plot with tabular data and linear regression
         parse_tabular(**kwargs, linear_regression=True)
+    elif "_m1z.txt" in kwargs["input_filename"] or "_m1z.TXT" in kwargs["input_filename"]: # manual plot with tabular data and linear regression
+        parse_tabular(**kwargs, linear_regression=True, zero_intercept=True)
     elif "_c.txt" in kwargs["input_filename"] or "_c.TXT" in kwargs["input_filename"]: # manual plot from comsol (remove headers and comment)
         parse_tabular(**kwargs, remove_header=True, remove_comment=True)
     elif "_m.txt" in kwargs["input_filename"] or "_m.TXT" in kwargs["input_filename"]: # manual plot with tabular data

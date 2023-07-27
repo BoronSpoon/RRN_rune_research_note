@@ -51,7 +51,7 @@ def remove_outlier(df):
     return df
 
 class Plot():
-    def __init__(self, df, interactive=False, linear_regression=False, wide=False, subplots=False, reference=False, logy=False):
+    def __init__(self, df, interactive=False, linear_regression=False, wide=False, subplots=False, reference=False, logy=False, zero_intercept=False):
         self.df = df
         keys = self.df.keys()
         self.interactive = interactive
@@ -60,6 +60,7 @@ class Plot():
         self.subplots = subplots
         self.reference = reference
         self.logy = logy
+        self.zero_intercept = zero_intercept
         if self.wide:
             self.figsize = [8,3]
         else:
@@ -125,7 +126,8 @@ class Plot():
     def fit_linear_regression(self):
         keys = self.df.keys()
         x, y = self.df[keys[0]].to_numpy().reshape(-1, 1), self.df[keys[1]].to_numpy().reshape(-1, 1)
-        model = LinearRegression()
+        fit_intercept = self.zero_intercept == False # if zero_intercept dont fit intercept
+        model = LinearRegression(fit_intercept=fit_intercept)
         model.fit(x, y)
         r2 = model.score(x, y)
         params = [model.coef_[0][0], model.intercept_[0]]
