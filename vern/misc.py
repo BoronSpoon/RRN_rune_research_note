@@ -130,7 +130,11 @@ class Plot():
         model = LinearRegression(fit_intercept=fit_intercept)
         model.fit(x, y)
         r2 = model.score(x, y)
-        params = [model.coef_[0][0], model.intercept_[0]]
+        if self.zero_intercept:
+            params = [model.coef_[0], 0]
+        else:
+            params = [model.coef_[0][0], model.intercept_[0]]
+
         self.df["fit_y"] = model.predict(x)
         return params, r2
 
