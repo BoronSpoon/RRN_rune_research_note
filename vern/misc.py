@@ -126,12 +126,14 @@ class Plot():
     def fit_linear_regression(self):
         keys = self.df.keys()
         x, y = self.df[keys[0]].to_numpy().reshape(-1, 1), self.df[keys[1]].to_numpy().reshape(-1, 1)
-        fit_intercept = self.zero_intercept == False # if zero_intercept dont fit intercept
-        model = LinearRegression(fit_intercept=fit_intercept)
+        if self.zero_intercept: # if zero_intercept dont fit intercept
+            model = LinearRegression(fit_intercept=False)
+        else:
+            model = LinearRegression(fit_intercept=True) # default = True
         model.fit(x, y)
         r2 = model.score(x, y)
         if self.zero_intercept:
-            params = [model.coef_[0], 0]
+            params = [model.coef_[0][0], 0]
         else:
             params = [model.coef_[0][0], model.intercept_[0]]
 
