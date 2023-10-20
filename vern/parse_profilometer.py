@@ -20,7 +20,7 @@ def read_files(input_path, csv_path, plot_path, angle_plot_path, hist_path, inte
     p.hist(hist_path)
 
     df_angle = pd.DataFrame()
-    df_angle["position (μm)"] = df["position (μm)"]
+    df_angle["position (μm)"] = df["position (μm)"][:-1]
     y = df["height (nm)"]
     dy = y[1:] - y[:-1]
     x = df["position (μm)"]*1000 # um -> nm
