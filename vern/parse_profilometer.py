@@ -26,6 +26,7 @@ def read_files(input_path, csv_path, plot_path, angle_plot_path, hist_path, inte
     x = df["position (μm)"]*1000 # um -> nm
     dx = x[1:] - x[:-1]
     df_angle["angle (deg)"] = np.arctan2(dy, dx)*180/np.pi
+    print(dy, dx)
     p = Plot(df_angle, interactive=True)
     p.plot(angle_plot_path)
 
