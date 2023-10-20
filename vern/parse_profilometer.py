@@ -21,13 +21,12 @@ def read_files(input_path, csv_path, plot_path, angle_plot_path, hist_path, inte
 
     df_angle = pd.DataFrame()
     df_angle["position (μm)"] = df["position (μm)"][:-1]
-    y = df["height (nm)"]
+    y = df["height (nm)"].to_numpy()
     dy = y[1:] - y[:-1]
-    x = df["position (μm)"]*1000 # um -> nm
+    x = (df["position (μm)"].to_numpy())*1000 # um -> nm
     dx = x[1:] - x[:-1]
     df_angle["angle (deg)"] = np.arctan2(dy, dx)*180/np.pi
-    print(dy, dx)
-    p = Plot(df_angle, interactive=True)
+    p = Plot(df_angle, interactive=interactive)
     p.plot(angle_plot_path)
 
 def parse_profilometer(**kwargs):
