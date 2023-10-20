@@ -96,6 +96,11 @@ def vern(argv=sys.argv):
     plot_filename = plot_filename_wo_ext + ".png"
     plot_path = os.path.join(plot_directory, plot_filename)
 
+    angle_plot_directory = os.path.join(input_directory, "report")
+    angle_plot_filename_wo_ext = f"{input_filename_wo_ext}_angle"
+    angle_plot_filename = angle_plot_filename_wo_ext + ".png"
+    angle_plot_path = os.path.join(angle_plot_directory, angle_plot_filename)
+
     hist_directory = os.path.join(input_directory, "report")
     hist_filename_wo_ext = input_filename_wo_ext + "_hist"
     hist_filename = hist_filename_wo_ext + ".png"
@@ -140,6 +145,11 @@ def vern(argv=sys.argv):
         "plot_directory":       plot_directory,
         "plot_filename":        plot_filename,
         "plot_filename_wo_ext": plot_filename_wo_ext,
+
+        "angle_plot_path":            angle_plot_path,
+        "angle_plot_directory":       angle_plot_directory,
+        "angle_plot_filename":        angle_plot_filename,
+        "angle_plot_filename_wo_ext": angle_plot_filename_wo_ext,
 
         "hist_path":            hist_path,
         "hist_directory":       hist_directory,
