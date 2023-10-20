@@ -96,10 +96,10 @@ def vern(argv=sys.argv):
     plot_filename = plot_filename_wo_ext + ".png"
     plot_path = os.path.join(plot_directory, plot_filename)
 
-    angle_plot_directory = os.path.join(input_directory, "report")
-    angle_plot_filename_wo_ext = f"{input_filename_wo_ext}_angle"
-    angle_plot_filename = angle_plot_filename_wo_ext + ".png"
-    angle_plot_path = os.path.join(angle_plot_directory, angle_plot_filename)
+    slope_plot_directory = os.path.join(input_directory, "report")
+    slope_plot_filename_wo_ext = f"{input_filename_wo_ext}_slope"
+    slope_plot_filename = slope_plot_filename_wo_ext + ".png"
+    slope_plot_path = os.path.join(slope_plot_directory, slope_plot_filename)
 
     hist_directory = os.path.join(input_directory, "report")
     hist_filename_wo_ext = input_filename_wo_ext + "_hist"
@@ -146,10 +146,10 @@ def vern(argv=sys.argv):
         "plot_filename":        plot_filename,
         "plot_filename_wo_ext": plot_filename_wo_ext,
 
-        "angle_plot_path":            angle_plot_path,
-        "angle_plot_directory":       angle_plot_directory,
-        "angle_plot_filename":        angle_plot_filename,
-        "angle_plot_filename_wo_ext": angle_plot_filename_wo_ext,
+        "slope_plot_path":            slope_plot_path,
+        "slope_plot_directory":       slope_plot_directory,
+        "slope_plot_filename":        slope_plot_filename,
+        "slope_plot_filename_wo_ext": slope_plot_filename_wo_ext,
 
         "hist_path":            hist_path,
         "hist_directory":       hist_directory,
