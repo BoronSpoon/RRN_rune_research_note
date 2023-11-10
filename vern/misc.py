@@ -71,8 +71,8 @@ class Plot():
                 self.figsize = [8,6]
                 self.subplot_x = 1
                 self.subplot_y = len(keys)
-                self.figsize[0] = int(self.figsize[0]/self.subplot_x)
-                self.figsize[1] = int(self.figsize[1]/self.subplot_y)
+                self.figsize[0] = np.ceil(self.figsize[0]/self.subplot_x)
+                self.figsize[1] = np.ceil(self.figsize[1]/self.subplot_y)
                 plt.rcParams["legend.fontsize"] = 15
             else:
                 self.figsize = [7,3]
