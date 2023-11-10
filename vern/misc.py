@@ -66,19 +66,18 @@ class Plot():
             self.figsize = [8,3]
         else:
             self.figsize = plt.rcParamsDefault["figure.figsize"]
-        if self.subplots:
-            if self.xrd:
-                self.figsize = [8,6]
-                self.subplot_x = 1
-                self.subplot_y = len(keys)
-                plt.rcParams["legend.fontsize"] = 15
-            else:
-                self.figsize = [7,3]
-                self.subplot_x = int((len(keys)-1)**0.5)
-                self.subplot_y = int(np.ceil((len(keys)-1)/self.subplot_x))
-                self.figsize[0] = int(self.figsize[0] * (self.subplot_x))
-                self.figsize[1] = int(self.figsize[1] * (self.subplot_y))
-                plt.rcParams["legend.fontsize"] = 15
+        if self.xrd:
+            self.figsize = [8,6]
+            self.subplot_x = 1
+            self.subplot_y = len(keys)
+            plt.rcParams["legend.fontsize"] = 15
+        elif self.subplots:
+            self.figsize = [7,3]
+            self.subplot_x = int((len(keys)-1)**0.5)
+            self.subplot_y = int(np.ceil((len(keys)-1)/self.subplot_x))
+            self.figsize[0] = int(self.figsize[0] * (self.subplot_x))
+            self.figsize[1] = int(self.figsize[1] * (self.subplot_y))
+            plt.rcParams["legend.fontsize"] = 15
         else:
             self.subplot_x = 1
             self.subplot_y = 1
@@ -107,7 +106,9 @@ class Plot():
                 else:
                     self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True)
             else:
-                if self.subplots:
+                if self.xrd:
+                    self.df.plot(logy="sym" if self.logy else False, kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["b"]*(len(keys)-1), yticks=[])
+                elif self.subplots:
                     if self.reference:
                         reference_df = pd.DataFrame()
                         reference_df[keys[0]] = self.df[keys[0]]
@@ -116,8 +117,6 @@ class Plot():
                         for i in range(len(keys)-2):
                             reference_df[keys[2+i]] = self.df[keys[2+i]]
                         reference_df.plot(logy="sym" if self.logy else False, kind="line", x=keys[0], ax=self.ax, subplots=[[reference_df.keys()[1+i], reference_df.keys()[1+(len(keys)-2)+i]] for i in range(len(keys)-2)], layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["orange"]*(len(keys)-2)+["b"]*(len(keys)-2))
-                    elif self.xrd:
-                        self.df.plot(logy="sym" if self.logy else False, kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["b"]*(len(keys)-1), yticks=[])
                     else:
                         self.df.plot(logy="sym" if self.logy else False, kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["b"]*(len(keys)-1))
                 else:
