@@ -20,5 +20,6 @@ def parse_tabular(**kwargs):
     subplots = kwargs["subplots"] if "subplots" in kwargs.keys() else False
     reference = kwargs["reference"] if "reference" in kwargs.keys() else False
     logy = kwargs["logy"] if "logy" in kwargs.keys() else False
+    xrd = kwargs["xrd"] if "xrd" in kwargs.keys() else False
     zero_intercept = kwargs["zero_intercept"] if "zero_intercept" in kwargs.keys() else False
-    read_files(kwargs["input_path"], kwargs["csv_path"], kwargs["plot_path"], interactive=interactive, linear_regression=linear_regression, wide=wide, subplots=subplots, reference=reference, logy=logy, zero_intercept=zero_intercept)
+    read_files(kwargs["input_path"], kwargs["csv_path"], kwargs["plot_path"], interactive=interactive, linear_regression=linear_regression, wide=wide, subplots=subplots, reference=reference, logy=logy, zero_intercept=zero_intercept, xrd=xrd)
