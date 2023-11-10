@@ -107,7 +107,7 @@ class Plot():
                     self.df.scatter(x=keys[0], ax=self.ax, fit_reg=True)
             else:
                 if self.xrd:
-                    self.df.plot(logy="sym" if self.logy else False, kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], style=["b"]*(len(keys)-1), yticks=[])
+                    self.df.plot(logy="sym" if self.logy else False, kind="line", x=keys[0], ax=self.ax, subplots=self.subplots, layout=(self.subplot_x,self.subplot_y), sharex=False, sharey=True, xlabel=keys[0].split("\t")[0], ylabel=keys[0].split("\t")[1], yticks=[])
                 elif self.subplots:
                     if self.reference:
                         reference_df = pd.DataFrame()
